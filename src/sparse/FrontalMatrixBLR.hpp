@@ -85,7 +85,7 @@ namespace strumpack {
      int task_depth=0) const override;
 
     void extract_CB_sub_matrix
-    (const std::vector<std::size_t>& I, const std::vector<std::size_t>& J,
+    (const std::vector<std::size_t>& Ivec, const std::vector<std::size_t>& J,
      DenseM_t& B, int task_depth) const override;
 
     std::string type() const override { return "FrontalMatrixBLR"; }
@@ -363,13 +363,13 @@ namespace strumpack {
 
   template<typename scalar_t,typename integer_t> void
   FrontalMatrixBLR<scalar_t,integer_t>::extract_CB_sub_matrix
-  (const std::vector<std::size_t>& I, const std::vector<std::size_t>& J,
+  (const std::vector<std::size_t>& Ivec, const std::vector<std::size_t>& J,
    DenseM_t& B, int task_depth) const {
     std::vector<std::size_t> lJ, oJ;
     this->find_upd_indices(J, lJ, oJ);
     if (lJ.empty()) return;
     std::vector<std::size_t> lI, oI;
-    this->find_upd_indices(I, lI, oI);
+    this->find_upd_indices(Ivec, lI, oI);
     if (lI.empty()) return;
     for (std::size_t j=0; j<lJ.size(); j++)
       for (std::size_t i=0; i<lI.size(); i++)

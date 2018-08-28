@@ -17,6 +17,9 @@ option(STRUMPACK_BUILD_TESTS "Build the tests" ON)
 option(STRUMPACK_DEV_TESTING "Enable extensive testing" OFF)
 option(STRUMPACK_C_INTERFACE "Build the C interface" ON)
 
+option(STRUMPACK_USE_SLATE "Use SLATE, the ECP ScaLAPACK replacement" OFF)
+
+
 if(NOT STRUMPACK_USE_MPI)
   if(STRUMPACK_USE_PARMETIS)
     message(STATUS "Disabling ParMetis. ParMetis requires MPI support,"
@@ -195,7 +198,7 @@ endif()
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
   "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-if (STRUMPACK_USE_MPI)
+if(STRUMPACK_USE_MPI)
   if(DEFINED SCALAPACK_LIBRARIES)
     set(LIBS ${LIBS} ${SCALAPACK_LIBRARIES})
     include_directories(${SCALAPACK_INCLUDES})
@@ -212,6 +215,21 @@ if (STRUMPACK_USE_MPI)
     endif()
   endif()
 endif()
+
+
+if(STRUMPACK_USE_SLATE)
+  if(DEFINED SLATE_LIBRARIES)
+    set(LIBS ${LIBS} ${SLATE_LIBRARIES})
+    include_directories(${SLATE_INCLUDES})
+    if(STRUMPACK_USE_MPI)
+      add_definitions(-DSLATE_WITH_MPI)
+    endif()
+  else()
+    message(WARNING "Could not find SLATE,"
+      " please define SLATE_LIBRARIES and SLATE_INCLUDES")
+  endif()
+endif()
+
 
 if(STRUMPACK_USE_PAPI)
   find_package(PAPI)
@@ -296,6 +314,12 @@ else()
   set(STRUMPACK_ALL_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_DEBUG}")
 endif()
 
+message(STATUS "includes = " ${INCLUDE_DIRECTORIES})
+get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+  set(STRUMPACK_ALL_INCLUDES "${STRUMPACK_ALL_INCLUDES} -I${dir}")
+endforeach()
+#message(STATUS "dirs = ${STRUMPACK_ALL_INCLUDES}")
 
 set(LIBSRC
   src/StrumpackParameters.cpp

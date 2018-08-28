@@ -35,6 +35,10 @@
 #include <cmath>
 #include <random>
 
+#if defined(STRUMPACK_USE_SLATE)
+#include <slate.hh>
+#endif
+
 #include "misc/TaskTimer.hpp"
 #include "dense/BLASLAPACKWrapper.hpp"
 #include "CompressedSparseMatrix.hpp"
@@ -80,7 +84,7 @@ namespace strumpack {
      int task_depth=0) const override;
 
     void extract_CB_sub_matrix
-    (const std::vector<std::size_t>& I, const std::vector<std::size_t>& J,
+    (const std::vector<std::size_t>& Ivec, const std::vector<std::size_t>& J,
      DenseM_t& B, int task_depth) const override;
     std::string type() const override { return "FrontalMatrixDense"; }
 
@@ -95,6 +99,9 @@ namespace strumpack {
   private:
     DenseM_t F11_, F12_, F21_, F22_;
     std::vector<int> piv; // regular int because it is passed to BLAS
+#if defined(STRUMPACK_USE_SLATE)
+    slate::Matrix<scalar_t> slateF11_, slateF12_, slateF21_, slateF22_;
+#endif
 
     FrontalMatrixDense(const FrontalMatrixDense&) = delete;
     FrontalMatrixDense& operator=(FrontalMatrixDense const&) = delete;
@@ -131,23 +138,23 @@ namespace strumpack {
     const std::size_t pdsep = paF11.rows();
     const std::size_t dupd = dim_upd();
     std::size_t upd2sep;
-    auto I = this->upd_to_parent(p, upd2sep);
+    auto Ivec = this->upd_to_parent(p, upd2sep);
 #if defined(STRUMPACK_USE_OPENMP_TASKLOOP)
 #pragma omp taskloop default(shared) grainsize(64)      \
   if(task_depth < params::task_recursion_cutoff_level)
 #endif
     for (std::size_t c=0; c<dupd; c++) {
-      auto pc = I[c];
+      auto pc = Ivec[c];
       if (pc < pdsep) {
         for (std::size_t r=0; r<upd2sep; r++)
-          paF11(I[r],pc) += F22_(r,c);
+          paF11(Ivec[r],pc) += F22_(r,c);
         for (std::size_t r=upd2sep; r<dupd; r++)
-          paF21(I[r]-pdsep,pc) += F22_(r,c);
+          paF21(Ivec[r]-pdsep,pc) += F22_(r,c);
       } else {
         for (std::size_t r=0; r<upd2sep; r++)
-          paF12(I[r],pc-pdsep) += F22_(r, c);
+          paF12(Ivec[r],pc-pdsep) += F22_(r, c);
         for (std::size_t r=upd2sep; r<dupd; r++)
-          paF22(I[r]-pdsep,pc-pdsep) += F22_(r,c);
+          paF22(Ivec[r]-pdsep,pc-pdsep) += F22_(r,c);
       }
     }
     STRUMPACK_FLOPS((is_complex<scalar_t>()?2:1) * dupd * dupd);
@@ -159,15 +166,15 @@ namespace strumpack {
   FrontalMatrixDense<scalar_t,integer_t>::sample_CB
   (const SPOptions<scalar_t>& opts, const DenseM_t& R, DenseM_t& Sr,
    DenseM_t& Sc, FrontalMatrix<scalar_t,integer_t>* pa, int task_depth) {
-    auto I = this->upd_to_parent(pa);
-    auto cR = R.extract_rows(I);
+    auto Ivec = this->upd_to_parent(pa);
+    auto cR = R.extract_rows(Ivec);
     DenseM_t cS(dim_upd(), R.cols());
     gemm(Trans::N, Trans::N, scalar_t(1.), F22_, cR,
          scalar_t(0.), cS, task_depth);
-    Sr.scatter_rows_add(I, cS, task_depth);
+    Sr.scatter_rows_add(Ivec, cS, task_depth);
     gemm(Trans::C, Trans::N, scalar_t(1.), F22_, cR,
          scalar_t(0.), cS, task_depth);
-    Sc.scatter_rows_add(I, cS, task_depth);
+    Sc.scatter_rows_add(Ivec, cS, task_depth);
     STRUMPACK_CB_SAMPLE_FLOPS
       (gemm_flops(Trans::N, Trans::N, scalar_t(1.), F22_, cR, scalar_t(0.)) +
        gemm_flops(Trans::C, Trans::N, scalar_t(1.), F22_, cR, scalar_t(0.)) +
@@ -235,6 +242,20 @@ namespace strumpack {
     if (rchild_)
       rchild_->extend_add_to_dense
         (F11_, F12_, F21_, F22_, this, task_depth);
+#if 0 //defined(STRUMPACK_USE_SLATE)
+    slateF11_ = slate::Matrix<scalar_t>::fromLAPACK
+      (F11_.rows(), F11_.cols(), F11_.data(), F11_.ld(),
+       std::max(F11_.rows(), F11_.cols()), 1, 1, MPI_COMM_NULL);
+    slateF12_ = slate::Matrix<scalar_t>::fromLAPACK
+      (F12_.rows(), F12_.cols(), F12_.data(), F12_.ld(),
+       std::max(F11_.rows(), F11_.cols()),  1, 1, MPI_COMM_NULL);
+    slateF21_ = slate::Matrix<scalar_t>::fromLAPACK
+      (F21_.rows(), F21_.cols(), F21_.data(), F21_.ld(),
+       std::max(F11_.rows(), F11_.cols()), 1, 1, MPI_COMM_NULL);
+    slateF22_ = slate::Matrix<scalar_t>::fromLAPACK
+      (F22_.rows(), F22_.cols(), F22_.data(), F22_.ld(),
+       std::max(F11_.rows(), F11_.cols()), 1, 1, MPI_COMM_NULL);
+#endif
   }
 
   template<typename scalar_t,typename integer_t> void
@@ -242,6 +263,10 @@ namespace strumpack {
   (const SpMat_t& A, const SPOptions<scalar_t>& opts,
    int etree_level, int task_depth) {
     if (dim_sep()) {
+#if 0 //defined(STRUMPACK_USE_SLATE)
+      std::map<slate::Option, slate::Value> slate_opts;
+      slate::getrf(slateF11_, slate_opts);
+#else
       piv = F11_.LU(task_depth);
       if (opts.replace_tiny_pivots()) {
         // TODO consider other values for thresh
@@ -251,7 +276,20 @@ namespace strumpack {
           if (std::abs(F11_(i,i)) < thresh)
             F11_(i,i) = (std::real(F11_(i,i)) < 0) ? -thresh : thresh;
       }
+#endif
       if (dim_upd()) {
+#if 0 //defined(STRUMPACK_USE_SLATE)
+        //F12_.laswp(piv, true);
+
+        slate::TriangularMatrix<scalar_t> F11_L
+          (slate::Uplo::Lower, slate::Diag::Unit, slateF11_);
+        slate::trsm(slate::Side::Left, scalar_t(1.), F11_L, slateF12_, slate_opts);
+        slate::TriangularMatrix<scalar_t> F11_U
+          (slate::Uplo::Upper, slate::Diag::NonUnit, slateF11_);
+        slate::trsm(slate::Side::Right, scalar_t(1.), F11_U, slateF21_, slate_opts);
+        slate::gemm(scalar_t(-1.), slateF21_, slateF12_,
+                    scalar_t(1.), slateF22_, slate_opts);
+#else
         F12_.laswp(piv, true);
         trsm(Side::L, UpLo::L, Trans::N, Diag::U,
              scalar_t(1.), F11_, F12_, task_depth);
@@ -259,6 +297,7 @@ namespace strumpack {
              scalar_t(1.), F11_, F21_, task_depth);
         gemm(Trans::N, Trans::N, scalar_t(-1.), F21_, F12_,
              scalar_t(1.), F22_, task_depth);
+#endif
       }
     }
     STRUMPACK_FULL_RANK_FLOPS
@@ -347,13 +386,13 @@ namespace strumpack {
 
   template<typename scalar_t,typename integer_t> void
   FrontalMatrixDense<scalar_t,integer_t>::extract_CB_sub_matrix
-  (const std::vector<std::size_t>& I, const std::vector<std::size_t>& J,
+  (const std::vector<std::size_t>& Ivec, const std::vector<std::size_t>& J,
    DenseM_t& B, int task_depth) const {
     std::vector<std::size_t> lJ, oJ;
     this->find_upd_indices(J, lJ, oJ);
     if (lJ.empty()) return;
     std::vector<std::size_t> lI, oI;
-    this->find_upd_indices(I, lI, oI);
+    this->find_upd_indices(Ivec, lI, oI);
     if (lI.empty()) return;
     for (std::size_t j=0; j<lJ.size(); j++)
       for (std::size_t i=0; i<lI.size(); i++)
