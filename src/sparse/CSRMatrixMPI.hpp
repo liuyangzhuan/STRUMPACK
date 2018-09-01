@@ -61,6 +61,16 @@ namespace strumpack {
     std::vector<integer_t> prbuf;
   };
 
+
+  /**
+   * \class CSRMatrixMPI
+   * \brief Block-row distributed compressed sparse row storage.
+   *
+   * TODO: cleanup this class
+   *  - use MPIComm
+   *  - store the block diagonal as a CSRMatrix
+   *  - ...
+   */
   template<typename scalar_t,typename integer_t>
   class CSRMatrixMPI : public CompressedSparseMatrix<scalar_t,integer_t> {
     using DistM_t = DistributedMatrix<scalar_t>;
@@ -90,9 +100,7 @@ namespace strumpack {
     inline integer_t local_nnz() const { return local_nnz_; }
 
     void spmv(const DenseM_t& x, DenseM_t& y) const override;
-    void omp_spmv(const DenseM_t& x, DenseM_t& y) const override;
     void spmv(const scalar_t* x, scalar_t* y) const override;
-    void omp_spmv(const scalar_t* x, scalar_t* y) const override;
 
     void apply_scaling
     (const std::vector<scalar_t>& Dr,
@@ -117,15 +125,17 @@ namespace strumpack {
     real_t max_scaled_residual
     (const scalar_t* x, const scalar_t* b) const override;
 
-    // TODO return by value? return a unique_ptr?
-    CSRGraph<integer_t>* get_sub_graph
-    (const integer_t* perm,
-     const std::pair<integer_t,integer_t>* graph_ranges) const;
+    CSRGraph<integer_t> get_sub_graph
+    (const std::vector<integer_t>& perm,
+     const std::vector<std::pair<integer_t,integer_t>>& graph_ranges) const;
+
     void print() const override;
     void print_dense(const std::string& name) const override;
     void print_MM(const std::string& filename) const override;
     void check() const;
 
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
     // implement outside of this class
     void extract_separator
     (integer_t, const std::vector<std::size_t>&,
@@ -151,6 +161,7 @@ namespace strumpack {
     void front_multiply_2d
     (integer_t, integer_t, const std::vector<integer_t>&, const DistM_t&,
      DistM_t&, DistM_t&, int) const override {}
+#endif //DOXYGEN_SHOULD_SKIP_THIS
 
   protected:
     void split_diag_offdiag();
@@ -467,11 +478,11 @@ namespace strumpack {
    * Extract part [graph_begin, graph_end) from this sparse matrix,
    * after applying the symmetric permutation perm/iperm.
    */
-  // TODO move this to CSRGraph, have it return a unique_ptr or value!
-  template<typename scalar_t,typename integer_t> CSRGraph<integer_t>*
+  // TODO move this to CSRGraph
+  template<typename scalar_t,typename integer_t> CSRGraph<integer_t>
   CSRMatrixMPI<scalar_t,integer_t>::get_sub_graph
-  (const integer_t* perm,
-   const std::pair<integer_t,integer_t>* graph_ranges) const {
+  (const std::vector<integer_t>& perm,
+   const std::vector<std::pair<integer_t,integer_t>>& graph_ranges) const {
     auto rank = mpi_rank(_comm);
     auto P = mpi_nprocs(_comm);
     auto scnts = new int[4*P+local_rows()];
@@ -533,16 +544,16 @@ namespace strumpack {
       n_edges += rbuf[prbuf+1];
       prbuf += 2 + rbuf[prbuf+1];
     }
-    auto g = new CSRGraph<integer_t>(n_vert, n_edges);
-    g->ptr(0) = 0;
+    CSRGraph<integer_t> g(n_vert, n_edges);
+    g.ptr(0) = 0;
     for (integer_t i=1; i<=n_vert; i++)
-      g->ptr(i) = g->ptr(i-1) + edge_count[i-1];
+      g.ptr(i) = g.ptr(i-1) + edge_count[i-1];
     delete[] edge_count;
     prbuf = 0;
     while (prbuf < rsize) {
       auto my_row = rbuf[prbuf] - graph_ranges[rank].first;
       std::copy(rbuf+prbuf+2, rbuf+prbuf+2+rbuf[prbuf+1],
-                g->ind()+g->ptr(my_row));
+                g.ind()+g.ptr(my_row));
       prbuf += 2 + rbuf[prbuf+1];
     }
     delete[] rbuf;
@@ -668,28 +679,16 @@ namespace strumpack {
 
   template<typename scalar_t,typename integer_t> void
   CSRMatrixMPI<scalar_t,integer_t>::spmv
-  (const scalar_t* x, scalar_t* y) const {
-    omp_spmv(x, y);
-  }
-
-  template<typename scalar_t,typename integer_t> void
-  CSRMatrixMPI<scalar_t,integer_t>::spmv
-  (const DenseM_t& x, DenseM_t& y) const {
-    omp_spmv(x, y);
-  }
-
-  template<typename scalar_t,typename integer_t> void
-  CSRMatrixMPI<scalar_t,integer_t>::omp_spmv
   (const DenseM_t& x, DenseM_t& y) const {
     assert(x.cols() == y.cols());
     assert(x.rows() == std::size_t(local_rows()));
     assert(y.rows() == std::size_t(local_rows()));
     for (std::size_t c=0; c<x.cols(); c++)
-      omp_spmv(x.ptr(0,c), y.ptr(0,c));
+      spmv(x.ptr(0,c), y.ptr(0,c));
   }
 
   template<typename scalar_t,typename integer_t> void
-  CSRMatrixMPI<scalar_t,integer_t>::omp_spmv
+  CSRMatrixMPI<scalar_t,integer_t>::spmv
   (const scalar_t* x, scalar_t* y) const {
     setup_spmv_buffers();
 
