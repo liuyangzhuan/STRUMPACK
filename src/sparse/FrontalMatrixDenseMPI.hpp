@@ -166,7 +166,7 @@ namespace strumpack {
       F11_ = DistM_t(grid(), dsep, dsep);
       using ExFront = ExtractFront<scalar_t,integer_t>;
       ExFront::extract_F11(F11_, A, this->sep_begin_, dsep);
-      if (this->dim_upd()) {
+      if (dupd) {
         F12_ = DistM_t(grid(), dsep, dupd);
         ExFront::extract_F12
           (F12_, A, this->sep_begin_, this->sep_end_, this->upd_);
@@ -181,18 +181,23 @@ namespace strumpack {
     }
     extend_add();
 #if defined(STRUMPACK_USE_SLATE)
-    slateF11_ = slate::Matrix<scalar_t>::fromScaLAPACK
-      (F11_.rows(), F11_.cols(), F11_.data(), F11_.ld(),
-       F11_.MB(), F11_.nprows(), F11_.npcols(), F11_.comm());
-    slateF12_ = slate::Matrix<scalar_t>::fromScaLAPACK
-      (F12_.rows(), F12_.cols(), F12_.data(), F12_.ld(),
-       F12_.MB(), F12_.nprows(), F12_.npcols(), F12_.comm());
-    slateF21_ = slate::Matrix<scalar_t>::fromScaLAPACK
-      (F21_.rows(), F21_.cols(), F21_.data(), F21_.ld(),
-       F21_.MB(), F21_.nprows(), F21_.npcols(), F21_.comm());
-    slateF22_ = slate::Matrix<scalar_t>::fromScaLAPACK
-      (F22_.rows(), F22_.cols(), F22_.data(), F22_.ld(),
-       F22_.MB(), F22_.nprows(), F22_.npcols(), F22_.comm());
+    if (dsep) {
+      slateF11_ = slate::Matrix<scalar_t>::fromScaLAPACK
+        (F11_.rows(), F11_.cols(), F11_.data(), F11_.ld(),
+         F11_.MB(), F11_.nprows(), F11_.npcols(), F11_.comm());
+      if (dupd) {
+        slateF12_ = slate::Matrix<scalar_t>::fromScaLAPACK
+          (F12_.rows(), F12_.cols(), F12_.data(), F12_.ld(),
+           F12_.MB(), F12_.nprows(), F12_.npcols(), F12_.comm());
+        slateF21_ = slate::Matrix<scalar_t>::fromScaLAPACK
+          (F21_.rows(), F21_.cols(), F21_.data(), F21_.ld(),
+           F21_.MB(), F21_.nprows(), F21_.npcols(), F21_.comm());
+      }
+    }
+    if (dupd)
+      slateF22_ = slate::Matrix<scalar_t>::fromScaLAPACK
+        (F22_.rows(), F22_.cols(), F22_.data(), F22_.ld(),
+         F22_.MB(), F22_.nprows(), F22_.npcols(), F22_.comm());
 #endif
   }
 
@@ -219,7 +224,7 @@ namespace strumpack {
         slate::gemm(scalar_t(-1.), slateF21_, slateF12_,
                     scalar_t(1.), slateF22_, slate_opts);
 #else
-        F12_.laswp(piv, true);
+        //F12_.laswp(piv, true);
         trsm(Side::L, UpLo::L, Trans::N, Diag::U, scalar_t(1.), F11_, F12_);
         trsm(Side::R, UpLo::U, Trans::N, Diag::N, scalar_t(1.), F11_, F21_);
         gemm(Trans::N, Trans::N, scalar_t(-1.), F21_, F12_, scalar_t(1.), F22_);
