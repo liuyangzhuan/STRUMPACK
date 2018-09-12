@@ -1,0 +1,173 @@
+srun: fatal: Can not execute ./build/examples/KernelRegressionMPI
+srun: Warning: can't run 2 processes on 32 nodes, setting nnodes to 2
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test
+# Reading data...
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test
+# Reading data...
+# Reading took 0.14704
+# matrix size = 10000 x 8
+# Reading took 0.147308
+# matrix size = 10000 x 8
+starting HSS compression .. 
+starting HSS compression .. 
+# compression time = 0.0204409
+# created K matrix of dimension 10000 x 10000 with 10 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 7.45635 MB 
+factorization start
+# compression time = 0.0205429
+# created K matrix of dimension 10000 x 10000 with 10 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 7.08323 MB 
+factorization start
+srun: error: nid00017: task 0: Segmentation fault
+srun: Terminating job step 14685044.1
+srun: error: nid00018: task 1: Segmentation fault
+srun: error: nid00017: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 1 processes on 32 nodes, setting nnodes to 1
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test
+# Reading data...
+# Reading took 0.0671449
+# matrix size = 10000 x 8
+starting HSS compression .. 
+# compression time = 0.0206609
+# created K matrix of dimension 10000 x 10000 with 10 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 7.1835 MB 
+factorization start
+srun: error: nid00017: task 0: Segmentation fault
+srun: Terminating job step 14685044.2
+srun: error: nid00017: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 1 processes on 32 nodes, setting nnodes to 1
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test
+# Reading data...
+# Reading took 0.0705988
+# matrix size = 10000 x 8
+starting HSS compression .. 
+# compression time = 0.0217141
+# created K matrix of dimension 10000 x 10000 with 10 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 7.47008 MB 
+factorization start
+srun: error: nid00017: task 0: Segmentation fault
+srun: Terminating job step 14685044.3
+srun: error: nid00017: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 1 processes on 32 nodes, setting nnodes to 1
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# Reading took 0.112888
+# matrix size = 10000 x 8
+
+# Starting HSS compression... 
+# Time for approximate neighbor search: 0.745564 sec
+# compressing with d = 128 + 10 (original)
+### compression time = 4.00721 ###
+# created K matrix of dimension 10000 x 10000 with 10 levels
+# compression succeeded!
+# rank(K) = 20
+# memory(K) = 8.3688 MB 
+# 1.0461% of dense
+# compression error = ||Kdense-K*I||_F/||Kdense||_F = 2.63508e-07
+
+# Factorization start
+# factorization time = 0.0478163
+
+# Solution start...
+# solve time = 0.00422427
+# total time: 4.05929
+# solution error = 3.12634e-07
+
+# Starting prediction...
+# Prediction took 0.318725
+# prediction score: 69.5%
+
+srun: Warning: can't run 1 processes on 32 nodes, setting nnodes to 1
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# Reading took 0.102672
+# matrix size = 10000 x 8
+
+# Starting HSS compression... 
+# Time for approximate neighbor search: 0.741729 sec
+# compressing with d = 128 + 10 (original)
+### compression time = 4.02871 ###
+# created K matrix of dimension 10000 x 10000 with 9 levels
+# compression succeeded!
+# rank(K) = 20
+# memory(K) = 8.35966 MB 
+# 1.04496% of dense
+# compression error = ||Kdense-K*I||_F/||Kdense||_F = 2.33094e-07
+
+# Factorization start
+# factorization time = 0.0572867
+
+# Solution start...
+# solve time = 0.00206342
+# total time: 4.08811
+# solution error = 3.2169e-07
+
+# Starting prediction...
+# Prediction took 0.321109
+# prediction score: 69.5%
+

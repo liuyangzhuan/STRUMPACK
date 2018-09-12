@@ -1,0 +1,84 @@
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test--hss_leaf_size
+# Reading data...
+# Reading took 0.0851043
+# matrix size = 1000 x 8
+starting HSS compression .. 
+# compression time = 0.00236103
+# created K matrix of dimension 1000 x 1000 with 6 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 0.729392 MB 
+factorization start
+srun: error: nid00010: task 0: Segmentation fault
+srun: Terminating job step 14557400.1
+srun: error: nid00010: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test--hss_leaf_size
+# Reading data...
+# Reading took 0.0810548
+# matrix size = 1000 x 8
+starting HSS compression .. 
+# compression time = 0.00236105
+# created K matrix of dimension 1000 x 1000 with 6 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 0.70072 MB 
+factorization start
+srun: error: nid00010: task 0: Segmentation fault
+srun: Terminating job step 14557400.2
+srun: error: nid00010: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test--hss_leaf_size
+# Reading data...
+# Reading took 0.0102457
+# matrix size = 1000 x 8
+starting HSS compression .. 
+# compression time = 0.00243822
+# created K matrix of dimension 1000 x 1000 with 6 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 0.719776 MB 
+factorization start
+srun: error: nid00010: task 0: Segmentation fault
+srun: Terminating job step 14557400.3
+srun: error: nid00010: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2mea, kd, pca) mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = 2means
+# validation/test = test--hss_leaf_size
+# Reading data...
+# Reading took 0.0496317
+# matrix size = 1000 x 8
+starting HSS compression .. 
+# compression time = 0.00257558
+# created K matrix of dimension 1000 x 1000 with 6 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 0.742352 MB 
+factorization start
+srun: error: nid00010: task 0: Segmentation fault
+srun: Terminating job step 14557400.4
+srun: error: nid00010: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.

@@ -990,7 +990,7 @@ int main(int argc, char *argv[]) {
   double lambda = 1.;
   int kernel = 1; // Gaussian=1, Laplace=2
   double total_time;
-  string mode("valid");
+  string mode("test");
 
   cout << endl;
   cout << "# usage: ./KernelRegression_mf file d h lambda "
@@ -1120,8 +1120,8 @@ int main(int argc, char *argv[]) {
   //cout << "# rank(K) = " << kernel_matrix.normF() << endl;
 
   // ---CHOOSE SEARCH OPTION ANN/STANDARD--------------
-   K.compress_ann(ann, scores, kernel_matrix, hss_opts);
-  //  K.compress(kernel_matrix, kernel_matrix, hss_opts);
+  //  K.compress_ann(ann, scores, kernel_matrix, hss_opts);
+   K.compress(kernel_matrix, kernel_matrix, hss_opts);
 
 
   cout << "### compression time = " << timer.elapsed() << " ###" <<endl;
@@ -1136,38 +1136,40 @@ int main(int argc, char *argv[]) {
     return 1;
   }
   cout << "# rank(K) = " << K.rank() << endl;
-  cout << "# HSS memory(K) = " << K.memory() / 1e6 << " MB " << endl;
+  cout << "# memory(K) = " << K.memory() / 1e6 << " MB " << endl;
 
   
-  // Build dense matrix to test error
+
   DenseMatrix<double> Kdense(n, n);
   if (kernel == 1) {
     for (int c=0; c<n; c++)
-      for (int r=0; r<n; r++){
+      for (int r=0; r<n; r++) 
+      {
         Kdense(r, c) = Gauss_kernel(&data_train[r*d], &data_train[c*d], d, h);
-        if (r == c) {
+        if (r == c)
+        {
           Kdense(r, c) = Kdense(r, c) + lambda;
         }
       }
-  } 
-  else {
+  } else {
     for (int c=0; c<n; c++)
-    for (int r=0; r<n; r++){
-      Kdense(r, c) = Laplace_kernel(&data_train[r*d], &data_train[c*d], d, h);
-      if (r == c) {
-        Kdense(r, c) = Kdense(r, c) + lambda;
+      for (int r=0; r<n; r++) 
+      {
+        Kdense(r, c) = Laplace_kernel(&data_train[r*d], &data_train[c*d], d, h);
+        if (r == c)
+        {
+          Kdense(r, c) = Kdense(r, c) + lambda;
+        }
       }
-    }
   }
 
-  cout << "# HSS matrix is "<< 100. * K.memory() /  Kdense.memory() << "% of dense" << endl;
-  // K.print_info(); // Multiple rank information
-
+  cout << "# "<< 100. * K.memory() /  Kdense.memory() << "% of dense" << endl;
+  //K.print_info();
   auto Ktest = K.dense();
   Ktest.scaled_add(-1., Kdense);
   cout << "# compression error = ||Kdense-K*I||_F/||Kdense||_F = "
        << Ktest.normF() / Kdense.normF() << endl;
-
+  
   cout << endl;
   cout << "# Factorization start" << endl;
   timer.start();
@@ -1212,7 +1214,7 @@ int main(int argc, char *argv[]) {
   K.solve(ULV, sample_rhs);
 
  // auto Bcheck = K.apply(weights);
-  sample_v.scaled_add(-1., sample_rhs);
+  sample_rhs.scaled_add(-1., sample_v);
 
   //cout << "weights_F =  "
   //    << weights.normF() << endl;
@@ -1225,10 +1227,10 @@ int main(int argc, char *argv[]) {
   //   cout << sample_v(i, 0) << endl;
   // }
   cout << "# solution error = "
-        << sample_v.normF() << endl;
+        << sample_rhs.normF()/sample_v.normF() << endl;
 
   cout << endl;
-  cout << "# Prediction start..." << endl;
+  cout << "# Starting prediction..." << endl;
   timer.start();
 
   double *prediction = new double[m];

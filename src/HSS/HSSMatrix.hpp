@@ -224,9 +224,7 @@ namespace strumpack {
 
 
       //void compress_ann (DenseM_t& ann, DenseM_t& scores, const elem_t& Aelem, const opts_t& opts);
-      void compress_ann
-      (DenseM_t&  ann, DenseM_t& scores,
-       const elem_t& Aelem, const opts_t& opts);
+      void compress_ann (DenseM_t&  ann, DenseM_t& scores, const elem_t& Aelem, const opts_t& opts);
 
 
       /**
@@ -376,16 +374,21 @@ namespace strumpack {
       (const mult_t& Amult, const elem_t& Aelem, const opts_t& opts);
 
       //NEW
+      // void compress_ann
+      // (const mult_t& Amult, const elem_t& Aelem,
+      //  data_points, ann_indices, scores_indices,
+      //  //const kopts_t& kopts);
+      //  const opts_t& opts);
+
       void compress_recursive_ann
       (DenseM_t& ann, DenseM_t&  scores,
        const elem_t& Aelem, const opts_t& opts,
-       WorkCompressANN<scalar_t>& w) override;
+       WorkCompressANN<scalar_t>& w, int d) override;
+
       void compute_local_samples_ann
       (DenseM_t& ann, DenseM_t& scores, WorkCompressANN<scalar_t>& w,
-       const elem_t& Aelem, const opts_t& opts);
-      bool compute_U_V_bases_ANN
-      (DenseM_t& S, const opts_t& opts,
-       WorkCompressANN<scalar_t>& w, int depth);
+       const elem_t& Aelem, int d);
+
 
       void compress_recursive_original
       (DenseM_t& Rr, DenseM_t& Rc, DenseM_t& Sr, DenseM_t& Sc,
@@ -401,6 +404,9 @@ namespace strumpack {
       bool compute_U_V_bases
       (DenseM_t& Sr, DenseM_t& Sc, const opts_t& opts,
        WorkCompress<scalar_t>& w, int d, int depth);
+      bool compute_U_V_bases_ANN
+      (DenseM_t& Sr, DenseM_t& Sc, const opts_t& opts,
+       WorkCompressANN<scalar_t>& w, int d, int depth);
       void compute_U_basis_stable
       (DenseM_t& Sr, const opts_t& opts,
        WorkCompress<scalar_t>& w, int d, int dd, int depth);

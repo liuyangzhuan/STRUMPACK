@@ -1,0 +1,696 @@
+srun: fatal: Can not execute ./build/examples/KernelRegressionMPI
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# Reading took 3.93725
+# matrix size = 100000 x 8
+# Reading took 3.95016
+# matrix size = 100000 x 8
+# Reading took 3.95439
+# matrix size = 100000 x 8
+# Reading took 3.94392
+# matrix size = 100000 x 8
+# Reading took 3.95459
+# matrix size = 100000 x 8
+# Reading took 3.9531
+# matrix size = 100000 x 8
+# Reading took 3.95467
+# matrix size = 100000 x 8
+# Reading took 3.95068
+# matrix size = 100000 x 8
+# Reading took 3.95478
+# matrix size = 100000 x 8
+# Reading took 3.95579
+# matrix size = 100000 x 8
+# Reading took 3.95607
+# matrix size = 100000 x 8
+# Reading took 3.93853
+# matrix size = 100000 x 8
+# Reading took 3.95638
+# matrix size = 100000 x 8
+# Reading took 3.93889
+# matrix size = 100000 x 8
+# Reading took 3.95661
+# matrix size = 100000 x 8
+# Reading took 3.95667
+# matrix size = 100000 x 8
+# Reading took 3.95682
+# matrix size = 100000 x 8
+# Reading took 3.94903
+# matrix size = 100000 x 8
+# Reading took 3.94736
+# matrix size = 100000 x 8
+# Reading took 3.95695
+# matrix size = 100000 x 8
+# Reading took 3.95705
+# matrix size = 100000 x 8
+# Reading took 3.95558
+# matrix size = 100000 x 8
+# Reading took 3.95184
+# matrix size = 100000 x 8
+# Reading took 3.95303
+# matrix size = 100000 x 8
+# Reading took 3.95724
+# matrix size = 100000 x 8
+# Reading took 3.9573
+# matrix size = 100000 x 8
+# Reading took 3.94273
+# matrix size = 100000 x 8
+# Reading took 3.9455
+# matrix size = 100000 x 8
+# Reading took 3.95582
+# matrix size = 100000 x 8
+# Reading took 3.94468
+# matrix size = 100000 x 8
+# Reading took 3.95752
+# matrix size = 100000 x 8
+# Reading took 4.00925
+# matrix size = 100000 x 8
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# Starting HSS compression... 
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = 2means
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# Reading took 1.10567
+# matrix size = 100000 x 8
+
+# Starting HSS compression... 
+# Time for approximate neighbor search: 5.1054 sec
+# compressing with d = 128 + 10 (original)

@@ -27,13 +27,13 @@ endif()
 set(CMAKE_CXX_STANDARD_REQUIRED on)
 include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-std=c++14" COMPILER_SUPPORTS_CXX14)
+check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
+check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 if(COMPILER_SUPPORTS_CXX14)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 elseif(COMPILER_SUPPORTS_CXX11)
-  check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 elseif(COMPILER_SUPPORTS_CXX0X)
-  check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 endif()
 
@@ -203,6 +203,8 @@ if(STRUMPACK_USE_SCOTCH)
 else()
   message(STATUS "Building STRUMPACK without Scotch/PTScotch support.")
 endif()
+
+set(LIBS ${LIBS} ${HMATRIX_LIBRARIES})
 
 message(STATUS "Linking with: " "${LIBS}")
 message(STATUS "Implicit C libs: " "${CMAKE_C_IMPLICIT_LINK_LIBRARIES}")
@@ -481,6 +483,8 @@ configure_file(${CMAKE_SOURCE_DIR}/examples/FileManipulation.h
   ${CMAKE_BINARY_DIR}/examples/FileManipulation.h COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/examples/find_ann.hpp
   ${CMAKE_BINARY_DIR}/examples/find_ann.hpp COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/examples/KernelRegressionMPI.cpp
+  ${CMAKE_BINARY_DIR}/examples/KernelRegressionMPI.cpp COPYONLY)
 
 if(STRUMPACK_BUILD_TESTS)
   include(CTest)
