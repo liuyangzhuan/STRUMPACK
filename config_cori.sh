@@ -6,7 +6,7 @@ cd build
 export CRAYPE_LINK_TYPE="dynamic"
 export PARMETIS_INSTALL="~/Cori/my_software/parmetis-4.0.3"
 cmake .. \
--DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_BUILD_TYPE=Debug \
 -DCMAKE_INSTALL_PREFIX=. \
 -DCMAKE_CXX_COMPILER=CC \
 -DCMAKE_C_COMPILER=cc \
@@ -19,3 +19,5 @@ cmake .. \
 make install VERBOSE=1
 cd examples
 make
+#cd ../test
+#make

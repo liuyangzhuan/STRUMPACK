@@ -171,3 +171,109 @@ srun: Warning: can't run 1 processes on 32 nodes, setting nnodes to 1
 # Prediction took 0.321109
 # prediction score: 69.5%
 
+srun: Warning: can't run 1 processes on 64 nodes, setting nnodes to 1
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = cob
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# Reading took 0.117761
+# matrix size = 10000 x 8
+
+# Starting HSS compression... 
+# Time for approximate neighbor search: 0.757612 sec
+# compressing with d = 128 + 10 (original)
+### compression time = 8.42758 ###
+# created K matrix of dimension 10000 x 10000 with 1 levels
+# compression succeeded!
+# rank(K) = 0
+# memory(K) = 800 MB 
+# 100% of dense
+# compression error = ||Kdense-K*I||_F/||Kdense||_F = 0
+
+# Factorization start
+# factorization time = 14.8231
+
+# Solution start...
+# solve time = 0.0720183
+# total time: 23.3228
+# solution error = 9.32824e-17
+
+# Starting prediction...
+# Prediction took 0.374899
+# prediction score: 69.5%
+
+srun: Warning: can't run 1 processes on 64 nodes, setting nnodes to 1
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = cob
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...
+# Reading took 0.0579874
+# matrix size = 10000 x 8
+
+# Starting HSS compression... 
+# Time for approximate neighbor search: 0.752504 sec
+# compressing with d = 128 + 10 (original)
+### compression time = 4.21317 ###
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 25
+# memory(K) = 7.67335 MB 
+# 0.959169% of dense
+# compression error = ||Kdense-K*I||_F/||Kdense||_F = 1.02797e-06
+
+# Factorization start
+# factorization time = 0.0751997
+
+# Solution start...
+# solve time = 0.00989618
+# total time: 4.29831
+# solution error = 1.06453e-06
+
+# Starting prediction...
+# Prediction took 0.347059
+# prediction score: 69.5%
+
+srun: Warning: can't run 1 processes on 64 nodes, setting nnodes to 1
+
+# usage: ./KernelRegression_mf file d h lambda kern(1=Gau,2=Lapl) reorder(nat, 2means, kd, pca) mode(valid, test)
+
+# data dimension    = 8
+# kernel h          = 0.1
+# lambda            = 10
+# kernel type       = Gauss
+# reordering/clust  = cob
+# validation/test   = test
+
+# hss_opts.d0       = 128
+# hss_opts.dd       = 64
+# hss_opts.rel_t    = 0.01
+# hss_opts.abs_t    = 1e-08
+# hss_opts.leaf     = 128
+
+# Reading data...

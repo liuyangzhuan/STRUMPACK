@@ -3,27 +3,27 @@ include_directories(${CMAKE_SOURCE_DIR}/test)
 
 add_executable(test_HSS_seq test_HSS_seq)
 add_executable(test_HSS_mpi test_HSS_mpi)
-add_executable(test_sparse_seq test_sparse_seq)
-add_executable(test_sparse_mpi test_sparse_mpi)
+# add_executable(test_sparse_seq test_sparse_seq)
+# add_executable(test_sparse_mpi test_sparse_mpi)
 
 
 target_link_libraries(test_HSS_seq strumpack ${LIB})
 target_link_libraries(test_HSS_mpi strumpack ${LIB})
-target_link_libraries(test_sparse_seq strumpack ${LIB})
-target_link_libraries(test_sparse_mpi strumpack ${LIB})
+# target_link_libraries(test_sparse_seq strumpack ${LIB})
+# target_link_libraries(test_sparse_mpi strumpack ${LIB})
 
-add_executable(test_BLR_seq test_BLR_seq)
-target_link_libraries(test_BLR_seq strumpack ${LIB})
+# add_executable(test_BLR_seq test_BLR_seq)
+# target_link_libraries(test_BLR_seq strumpack ${LIB})
 
 
 add_test("user_test_HSS_seq" ${CMAKE_CURRENT_BINARY_DIR}/test_HSS_seq T 100)
 add_test("user_test_HSS_mpi" ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 2
   ${MPIEXEC_PREFLAGS} ${CMAKE_CURRENT_BINARY_DIR}/test_HSS_mpi T 100)
-add_test("user_test_sparse_seq" ${CMAKE_CURRENT_BINARY_DIR}/test_sparse_seq
-  ../examples/pde900.mtx)
-add_test("user_test_sparse_mpi" ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 2
-  ${MPIEXEC_PREFLAGS} ${CMAKE_CURRENT_BINARY_DIR}/test_sparse_mpi m
-  ../examples/pde900.mtx)
+# add_test("user_test_sparse_seq" ${CMAKE_CURRENT_BINARY_DIR}/test_sparse_seq
+  # ../examples/pde900.mtx)
+# add_test("user_test_sparse_mpi" ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 2
+  # ${MPIEXEC_PREFLAGS} ${CMAKE_CURRENT_BINARY_DIR}/test_sparse_mpi m
+  # ../examples/pde900.mtx)
 
 if(STRUMPACK_DEV_TESTING)
   set(THREADS 1 3 8)

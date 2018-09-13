@@ -1,0 +1,38 @@
+ CFIE computing
+ num of MPI Processors:           2
+ num of OpenMP Threads:           1
+ wavelength:  5.000000074505806E-002
+ constructing MLMDA format......
+ Maxlevel_for_blocks:           5
+ level:           0 finished  7.8125000E-03 seconds cost
+ level:           1 finished  3.9062500E-03 seconds cost
+ level:           2 finished  3.9062500E-03 seconds cost
+ level:           3 finished  0.0000000E+00 seconds cost
+ level:           4 finished  3.9062500E-03 seconds cost
+ level:           5 finished  3.9062500E-03 seconds cost
+ 
+ Determining leaf-blocks...
+ Near or Far admissible parameter:  0.100000001490116     
+ Level:           1 Leafs           0
+ Level:           2 Leafs           8
+ Level:           3 Leafs          18
+ Level:           4 Leafs          32
+ Level:           5 Leafs          96
+ MLMDA formatting finished
+     
+ MLMDA impedance matrix filling......
+ Forward ACA error threshold  1.000000000000000E-002
+ Forward SVD error threshold  1.000000000000000E-002
+ 
+    
+           2 total blocks
+     1  blocks finished 5.0564601E+00  secnds 1.4400000E+00  Mbytes
+     2  blocks finished 4.1613472E+00  secnds 1.4220032E+01  Mbytes
+ 
+ Total filling time:   9.24326086044312      Seconds
+ 
+   35.4752480000000      MB costed for MLMDA blcocks
+   28.1150720000000      MB costed for near field blcocks
+ 
+ MLMDA impedance matrix filling finished
+     

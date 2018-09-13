@@ -44,8 +44,11 @@ using namespace std;
 using namespace strumpack;
 using namespace strumpack::HSS;
 
-// FAST_H_SAMPLING= 0: slow sampling 1: H sampling 2: HODLR sampling
-#define FAST_H_SAMPLING 2
+// FAST_H_SAMPLING= 0: N^2 sampling followed by HSS factor-solve 
+// FAST_H_SAMPLING= 1: H sampling followed by HSS factor-solve
+// FAST_H_SAMPLING= 2: HODLR sampling followed by HSS factor-solve
+// FAST_H_SAMPLING= 3: HODLR sampling followed by HODLR factor-solve
+#define FAST_H_SAMPLING 0
 
 #if defined(_OPENMP)
 #include <omp.h>
@@ -879,15 +882,15 @@ public:
   int _n = 0;
   double _h = 0.;
   double _l = 0.;
-  int _ctxt_all = -1;
-  int _prows = -1;
-  int _pcols = -1;
+  int _nprows = -1;
+  int _npcols = -1;
   std::vector<int> _Hperm;
   std::vector<int> _iHperm;
   int _Hrows = 0;
   int _cluster_size = 500; // finest leafsize
   int _nlevel = 0; // 0: tree level, nonzero if a tree is provided 
   int* _tree = new int[(int)pow(2,_nlevel)]; //user provided array containing size of each leaf node, not used if _nlevel=0  
+  int _com_opt=2;			 
   vector<int> _dist;
   C_QuantZmn* quant_ptr;
   F2Cptr ho_bf;  //HODLR returned by Fortran code 
@@ -901,44 +904,44 @@ public:
   
   KernelMPI() = default;
   KernelMPI(vector<double> data, int d, double h, double l,
-            HSSOptions<double>& opts, int ctxt_all, 
+            HSSOptions<double>& opts, 
 	    int nprow, int npcol,  int nmpi, int ninc, int aca, int cluster_size, int nlevel, int *tree)
     : _data(move(data)), _d(d), _n(_data.size() / _d),
-      _h(h), _l(l), _ctxt_all(ctxt_all), _prows(nprow), _pcols(npcol),_cluster_size(cluster_size),_nlevel(nlevel) {
+      _h(h), _l(l), _nprows(nprow), _npcols(npcol),_cluster_size(cluster_size),_nlevel(nlevel),_com_opt(aca) {
     assert(size_t(_n * _d) == _data.size());
 
-// #if FAST_H_SAMPLING == 1
-    // const auto P = mpi_nprocs();
-    // const auto rank = mpi_rank();
-    // if (!rank)
-      // cout << "# Called <FAST_H_SAMPLING> Started matrix construction..." << endl;
-    // auto starttime = MPI_Wtime();
-    // int Nmin = 500;    // finest leafsize
-    // double tol = 1e-2; // compression tolerance
-    // //double tol = opts.rel_tol(); // compression tolerance
-    // int nth = omp_get_max_threads();
-    // _Hperm.resize(_n);
-    // FC_GLOBAL_(h_matrix_fill,H_MATRIX_FILL)
-      // (&_n, &_d, _data.data(), &Nmin, &tol, &h, &l,
-       // &nth, &nmpi, &ninc, &aca, _Hperm.data(), &_Hrows);
-    // for (auto& i : _Hperm) i--; // Fortran to C
-    // MPI_Bcast(_Hperm.data(), _n, MPI_INT, 0, MPI_COMM_WORLD);
-    // _iHperm.resize(_n);
-    // for (int i=0; i<_n; i++) 
-      // _iHperm[_Hperm[i]] = i;
-    // _dist.resize(P+1);
-    // _dist[rank+1] = _Hrows;
-    // MPI_Allgather
-      // (MPI_IN_PLACE, 0, MPI_DATATYPE_NULL,
-       // _dist.data()+1, 1, MPI_INT, MPI_COMM_WORLD);
-    // for (int p=0; p<P; p++)
-      // _dist[p+1] += _dist[p];
-    // auto endtime = MPI_Wtime();
-    // if (!rank)
-      // cout << "# H Matrix construction time " << endtime - starttime
-           // << " seconds" << endl;
+#if FAST_H_SAMPLING == 1
+    const auto P = mpi_nprocs();
+    const auto rank = mpi_rank();
+    if (!rank)
+      cout << "# Called <FAST_H_SAMPLING> Started matrix construction..." << endl;
+    auto starttime = MPI_Wtime();
+    int Nmin = 500;    // finest leafsize
+    double tol = 1e-2; // compression tolerance
+    //double tol = opts.rel_tol(); // compression tolerance
+    int nth = 1;
+    _Hperm.resize(_n);
+    FC_GLOBAL_(h_matrix_fill,H_MATRIX_FILL)
+      (&_n, &_d, _data.data(), &Nmin, &tol, &h, &l,
+       &nth, &nmpi, &ninc, &aca, _Hperm.data(), &_Hrows);
+    for (auto& i : _Hperm) i--; // Fortran to C
+    MPI_Bcast(_Hperm.data(), _n, MPI_INT, 0, MPI_COMM_WORLD);
+    _iHperm.resize(_n);
+    for (int i=0; i<_n; i++) 
+      _iHperm[_Hperm[i]] = i;
+    _dist.resize(P+1);
+    _dist[rank+1] = _Hrows;
+    MPI_Allgather
+      (MPI_IN_PLACE, 0, MPI_DATATYPE_NULL,
+       _dist.data()+1, 1, MPI_INT, MPI_COMM_WORLD);
+    for (int p=0; p<P; p++)
+      _dist[p+1] += _dist[p];
+    auto endtime = MPI_Wtime();
+    if (!rank)
+      cout << "# H Matrix construction time " << endtime - starttime
+           << " seconds" << endl;
 		   
-// #elif FAST_H_SAMPLING == 2	
+#elif FAST_H_SAMPLING == 2	|| FAST_H_SAMPLING == 3
 	   
     int P = mpi_nprocs();
     const auto rank = mpi_rank();
@@ -954,7 +957,7 @@ public:
 	int preorder=1;
 	// int Nmin = 500;    // finest leafsize
 	double tol = 1e-2; // compression tolerance
-	int com_opt=2;    //compression option 1:SVD 2:RRQR 3:ACA 4:BACA  
+	// int com_opt=2;    //compression option 1:SVD 2:RRQR 3:ACA 4:BACA  
 	int sort_opt=3; //1:KD tree 3:balanced 2-means
 	int checkerr = 0; //1: check compression quality 
 	int batch = 100; //batch size for BACA	
@@ -977,7 +980,7 @@ public:
 	c_hodlr_set_D_option(&option, "tol_comp", tol);
 	c_hodlr_set_I_option(&option, "preorder", preorder);
 	c_hodlr_set_I_option(&option, "Nmin_leaf", _cluster_size); 
-	c_hodlr_set_I_option(&option, "RecLR_leaf", com_opt); 
+	c_hodlr_set_I_option(&option, "RecLR_leaf", _com_opt); 
 	c_hodlr_set_I_option(&option, "xyzsort", sort_opt); 
 	c_hodlr_set_I_option(&option, "ErrFillFull", checkerr); 
 	c_hodlr_set_I_option(&option, "BACA_Batch", batch); 
@@ -1004,7 +1007,7 @@ public:
       cout << "# HODLR construction time " << endtime - starttime
            << " seconds" << endl;
       
-// #endif
+#endif
 
   }
 
@@ -1060,10 +1063,10 @@ public:
     if (_Hrows) {
       vector<int> src_c(cols);
       for (int c=0; c<cols; c++)
-	src_c[c] = ((c / B) % _pcols) * _prows;
+	src_c[c] = ((c / B) % _npcols) * _nprows;
       for (int r=0; r<_Hrows; r++) {
 	auto gr = _iHperm[r + _dist[rank]];
-	auto src_r = (gr / B) % _prows;
+	auto src_r = (gr / B) % _nprows;
 	for (int c=0; c<cols; c++)
 	  R1D(r, c) = *(pbuf[src_r + src_c[c]]++);
       }
@@ -1085,12 +1088,12 @@ public:
       vector<tuple<int,int,int>> glp(_Hrows);
       for (int r=0; r<_Hrows; r++) {
 	auto gr = _iHperm[r + _dist[rank]];
-	glp[r] = tuple<int,int,int>{gr,r,(gr / B) % _prows};
+	glp[r] = tuple<int,int,int>{gr,r,(gr / B) % _nprows};
       }
       sort(glp.begin(), glp.end());
       vector<int> pc(cols);
       for (int c=0; c<cols; c++)
-	pc[c] = ((c / B) % _pcols) * _prows;
+	pc[c] = ((c / B) % _npcols) * _nprows;
       {
 	vector<size_t> count(P);
 	for (int r=0; r<_Hrows; r++)
@@ -1119,30 +1122,30 @@ public:
   }
 
 
-// #if FAST_H_SAMPLING == 1
+#if FAST_H_SAMPLING == 1
 
-  // void operator()(DistM_t &R, DistM_t &Sr, DistM_t &Sc) {
-    // auto starttime = MPI_Wtime();
-    // int Ncol = R.cols();
-    // {
-      // DenseM_t S1D(_Hrows, Ncol);
-      // {
-	// DenseM_t R1D = redistribute_2D_to_1D(R);
-	// FC_GLOBAL_(h_matrix_apply,H_MATRIX_APPLY)
-	  // (&_n, &Ncol, R1D.data(), S1D.data());
-      // }
-      // redistribute_1D_to_2D(S1D, Sr);
-    // }
-    // Sc = Sr;
-    // auto endtime = MPI_Wtime();
-    // if (!mpi_rank())
-      // cout << "# Apply time " << (endtime-starttime)
-           // << " seconds, per vector "
-           // << ((endtime-starttime)/Ncol)
-           // << " seconds" << endl;
-  // }		   
+  void operator()(DistM_t &R, DistM_t &Sr, DistM_t &Sc) {
+    auto starttime = MPI_Wtime();
+    int Ncol = R.cols();
+    {
+      DenseM_t S1D(_Hrows, Ncol);
+      {
+	DenseM_t R1D = redistribute_2D_to_1D(R);
+	FC_GLOBAL_(h_matrix_apply,H_MATRIX_APPLY)
+	  (&_n, &Ncol, R1D.data(), S1D.data());
+      }
+      redistribute_1D_to_2D(S1D, Sr);
+    }
+    Sc = Sr;
+    auto endtime = MPI_Wtime();
+    if (!mpi_rank())
+      cout << "# Apply time " << (endtime-starttime)
+           << " seconds, per vector "
+           << ((endtime-starttime)/Ncol)
+           << " seconds" << endl;
+  }		   
 
-// #elif FAST_H_SAMPLING == 2
+#elif FAST_H_SAMPLING == 2 || FAST_H_SAMPLING == 3
   void operator()(DistM_t &R, DistM_t &Sr, DistM_t &Sc) {
     auto starttime = MPI_Wtime();
     int Ncol = R.cols();
@@ -1164,64 +1167,64 @@ public:
 		   
   }
 
-// #else
+#else
 
-  // void times(DenseM_t &R, DistM_t &S, int Rprow) {
-    // const auto B = S.MB();
-    // const auto Bc = S.lcols();
-    // DenseM_t Asub(B, B);
-// #pragma omp parallel for firstprivate(Asub) schedule(dynamic)
-    // for (int lr = 0; lr < S.lrows(); lr += B) {
-      // const size_t Br = std::min(B, S.lrows() - lr);
-      // const int Ar = S.rowl2g(lr);
-      // for (int k = 0, Ac = Rprow*B; Ac < _n; k += B) {
-        // const size_t Bk = std::min(B, _n - Ac);
-        // // construct a block of A
-        // for (size_t j = 0; j < Bk; j++) {
-          // for (size_t i = 0; i < Br; i++) {
-            // Asub(i, j) = Gauss_kernel
-              // (&_data[(Ar + i) * _d], &_data[(Ac + j) * _d], _d, _h);
-          // }
-          // if (Ar==Ac) Asub(j,j) += _l;
-        // }
-        // DenseMW_t Ablock(Br, Bk, Asub, 0, 0);
-        // DenseMW_t Sblock(Br, Bc, &S(lr, 0), S.ld());
-        // DenseMW_t Rblock(Bk, Bc, &R(k, 0), R.ld());
-        // // multiply block of A with a row-block of Rr and add result to Sr
-        // gemm(Trans::N, Trans::N, 1., Ablock, Rblock, 1., Sblock);
-        // Ac += S.prows() * B;
-      // }
-    // }
-  // }
+  void times(DenseM_t &R, DistM_t &S, int Rprow) {
+    const auto B = S.MB();
+    const auto Bc = S.lcols();
+    DenseM_t Asub(B, B);
+#pragma omp parallel for firstprivate(Asub) schedule(dynamic)
+    for (int lr = 0; lr < S.lrows(); lr += B) {
+      const size_t Br = std::min(B, S.lrows() - lr);
+      const int Ar = S.rowl2g(lr);
+      for (int k = 0, Ac = Rprow*B; Ac < _n; k += B) {
+        const size_t Bk = std::min(B, _n - Ac);
+        // construct a block of A
+        for (size_t j = 0; j < Bk; j++) {
+          for (size_t i = 0; i < Br; i++) {
+            Asub(i, j) = Gauss_kernel
+              (&_data[(Ar + i) * _d], &_data[(Ac + j) * _d], _d, _h);
+          }
+          if (Ar==Ac) Asub(j,j) += _l;
+        }
+        DenseMW_t Ablock(Br, Bk, Asub, 0, 0);
+        DenseMW_t Sblock(Br, Bc, &S(lr, 0), S.ld());
+        DenseMW_t Rblock(Bk, Bc, &R(k, 0), R.ld());
+        // multiply block of A with a row-block of Rr and add result to Sr
+        gemm(Trans::N, Trans::N, 1., Ablock, Rblock, 1., Sblock);
+        Ac += S.nprows() * B;
+      }
+    }
+  }
 
-  // void operator()(DistM_t &R, DistM_t &Sr, DistM_t &Sc) {
-    // Sr.zero();
-    // int maxlocrows = R.MB() * (R.rows() / R.MB());
-    // if (R.rows() % R.MB()) maxlocrows += R.MB();
-    // int maxloccols = R.MB() * (R.cols() / R.MB());
-    // if (R.cols() % R.MB()) maxloccols += R.MB();
-    // DenseM_t tmp(maxlocrows, maxloccols);
-    // // each processor broadcasts his/her local part of R to all
-    // // processes in the same column of the BLACS grid, one after the
-    // // other
-    // for (int p=0; p<R.prows(); p++) {
-      // if (p == R.prow()) {
-        // strumpack::scalapack::gebs2d
-          // (R.ctxt(), 'C', ' ', R.lrows(), R.lcols(), R.data(), R.ld());
-        // DenseMW_t Rdense(R.lrows(), R.lcols(), R.data(), R.ld());
-        // strumpack::copy(Rdense, tmp, 0, 0);
-      // } else {
-        // int recvrows = strumpack::scalapack::numroc
-          // (R.rows(), R.MB(), p, 0, R.prows());
-        // strumpack::scalapack::gebr2d
-          // (R.ctxt(), 'C', ' ', recvrows, R.lcols(),
-           // tmp.data(), tmp.ld(), p, R.pcol());
-      // }
-      // times(tmp, Sr, p);
-    // }
-    // Sc = Sr;
-  // }
-// #endif
+  void operator()(DistM_t &R, DistM_t &Sr, DistM_t &Sc) {
+    Sr.zero();
+    int maxlocrows = R.MB() * (R.rows() / R.MB());
+    if (R.rows() % R.MB()) maxlocrows += R.MB();
+    int maxloccols = R.MB() * (R.cols() / R.MB());
+    if (R.cols() % R.MB()) maxloccols += R.MB();
+    DenseM_t tmp(maxlocrows, maxloccols);
+    // each processor broadcasts his/her local part of R to all
+    // processes in the same column of the BLACS grid, one after the
+    // other
+    for (int p=0; p<R.nprows(); p++) {
+      if (p == R.prow()) {
+        strumpack::scalapack::gebs2d
+          (R.ctxt(), 'C', ' ', R.lrows(), R.lcols(), R.data(), R.ld());
+        DenseMW_t Rdense(R.lrows(), R.lcols(), R.data(), R.ld());
+        strumpack::copy(Rdense, tmp, 0, 0);
+      } else {
+        int recvrows = strumpack::scalapack::numroc
+          (R.rows(), R.MB(), p, 0, R.nprows());
+        strumpack::scalapack::gebr2d
+          (R.ctxt(), 'C', ' ', recvrows, R.lcols(),
+           tmp.data(), tmp.ld(), p, R.pcol());
+      }
+      times(tmp, Sr, p);
+    }
+    Sc = Sr;
+  }
+#endif
 };
 
 vector<double> write_from_file(string filename) {
@@ -1237,18 +1240,13 @@ vector<double> write_from_file(string filename) {
   return data;
 }
 
-int main(int argc, char *argv[]) {
-  MPI_Init(&argc, &argv);
+int run(int argc, char *argv[]) {
+  // MPI_Init(&argc, &argv);
   auto P = mpi_nprocs(MPI_COMM_WORLD);
   // initialize the BLACS grid
   int npcol = floor(sqrt((float)P));
   int nprow = P / npcol;
   int ctxt, dummy, prow, pcol;
-  scalapack::Cblacs_get(0, 0, &ctxt);
-  scalapack::Cblacs_gridinit(&ctxt, "C", nprow, npcol);
-  scalapack::Cblacs_gridinfo(ctxt, &dummy, &dummy, &prow, &pcol);
-  int ctxt_all = scalapack::Csys2blacs_handle(MPI_COMM_WORLD);
-  scalapack::Cblacs_gridinit(&ctxt_all, "R", 1, P);
 
 	BLACSGrid grid(MPI_COMM_WORLD);								 
   string filename("smalltest.dat");
@@ -1364,13 +1362,13 @@ int main(int argc, char *argv[]) {
 
   KernelMPI kernel_matrix
     (data_train, d, h, lambda, hss_opts,
-     ctxt_all, nprow, npcol, nmpi, ninc, ACA, cluster_size, nlevel, tree);
+     nprow, npcol, nmpi, ninc, ACA, cluster_size, nlevel, tree);
 
   auto f0_compress = strumpack::params::flops.load();
 
 
 	
-#if FAST_H_SAMPLING == 2	
+#if FAST_H_SAMPLING == 3	
     // factor hodlr 	
 	c_hodlr_factor(&kernel_matrix.ho_bf, &kernel_matrix.option, &kernel_matrix.stats, &kernel_matrix.ptree);		
 	
@@ -1441,7 +1439,7 @@ int main(int argc, char *argv[]) {
   timer.start();
   auto f0_solve = strumpack::params::flops.load();
   
-#if FAST_H_SAMPLING == 2  
+#if FAST_H_SAMPLING == 3  
 	DenseMatrix<double> S1D(kernel_matrix._Hrows, 1);
 	DenseMatrix<double> R1D = kernel_matrix.redistribute_2D_to_1D(wdist);
 	int rhs=1;      
@@ -1453,7 +1451,7 @@ int main(int argc, char *argv[]) {
 	DistributedMatrix<double> Bcheck(&grid, n, 1);
 	Bcheck.scatter(B);
     kernel_matrix.redistribute_1D_to_2D(R1D, Bcheck);  
-  
+ 
 #else
   K->solve(ULV, wdist);
   if (!mpi_rank())
@@ -1467,12 +1465,13 @@ int main(int argc, char *argv[]) {
   if (!mpi_rank())
     cout << "# total time (comp + fact): " << total_time << endl;
 	
-	auto Bcheck = K->apply(wdist);
-	
+	auto Bcheck = K->apply(wdist);	
 #endif
 
-c_hodlr_printstats(&kernel_matrix.stats, &kernel_matrix.ptree);	
-  
+
+#if FAST_H_SAMPLING == 2 || FAST_H_SAMPLING == 3 	 
+	c_hodlr_printstats(&kernel_matrix.stats, &kernel_matrix.ptree);	
+#endif  
 
   Bcheck.scaled_add(-1., Bdist);
   auto Bchecknorm = Bcheck.normF() / Bdist.normF();
@@ -1527,7 +1526,7 @@ c_hodlr_printstats(&kernel_matrix.stats, &kernel_matrix.ptree);
 
 	
 
-#if FAST_H_SAMPLING == 2  
+#if FAST_H_SAMPLING == 3  
 	DenseMatrix<double> S1D(kernel_matrix._Hrows, 1);
 	DenseMatrix<double> R1D = kernel_matrix.redistribute_2D_to_1D(sample_rhs_dist);
 	int rhs=1;      
@@ -1598,7 +1597,20 @@ c_hodlr_printstats(&kernel_matrix.stats, &kernel_matrix.ptree);
     cout << "# prediction score: " << ((m - incorrect_quant) / m) * 100 << "%"
          << endl << endl;
 
+  // scalapack::Cblacs_exit(1);
+  // MPI_Finalize();
+  return 0;
+}
+
+
+int main(int argc, char* argv[]) {
+  MPI_Init(&argc, &argv);
+  int ierr;
+#pragma omp parallel
+#pragma omp single nowait
+  ierr = run(argc, argv);
+
   scalapack::Cblacs_exit(1);
   MPI_Finalize();
-  return 0;
+  return ierr;
 }

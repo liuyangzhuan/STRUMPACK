@@ -1,0 +1,2467 @@
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.0059182
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           8           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           8           9           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           8           9           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           8           9           2           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           8           9           2           4
+           3           0           0
+ constructing level           6
+ rankmax_of_level so far:           8           9           2           4
+           3           7           0
+ constructing level           7
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ constructing level           8
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ rankmax_of_level:           8          10           6           6          11
+           7           5
+ 
+ Total construction time:   7.26623487472534      Seconds
+ Total construction flops:      5.68E+09
+ 
+   4.92914062500000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 7.29749 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  1.394295692443848E-002 Seconds
+ computing inverse block time:  2.562499046325684E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.792120933532715E-002
+      Time_RedistB:  4.756927490234375E-003
+      Time_RedistV:  1.008033752441406E-003
+ time_tmp  0.000000000000000E+000
+ Factorization flops:      1.96E+08
+ 
+   2.46365625000000      MB costed for butterfly inverse blocks
+   4.92914062500000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      7.27E+00 Seconds
+    Construction mem:      1.10E+01 MB
+  Construction flops:      5.68E+09
+  Factorization time:      2.56E-02 Seconds
+   Factorization mem:      1.35E+01 MB
+ Factorization flops:      1.96E+08
+          Solve time:      1.31E-03 Seconds
+         Solve flops:      8.14E+06
+         C_mult time:      9.68E-04 Seconds
+        C_mult flops:      7.51E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 7.3669e-17
+ Solve ......
+ Solve finished
+     
+# solution error = 9.55436e-07
+# Starting prediction step
+# prediction took 0.236401
+# prediction score: 69.5%
+
+srun: error: nid00096: task 0: Segmentation fault
+srun: Terminating job step 14789593.1
+srun: error: nid00097: task 1: Segmentation fault
+srun: error: nid00096: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: error: nid00097: task 1: Segmentation fault
+srun: error: Task 1 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00582437
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           8           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           8           9           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           8           9           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           8           9           2           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           8           9           2           4
+           3           0           0
+ constructing level           6
+ rankmax_of_level so far:           8           9           2           4
+           3           7           0
+ constructing level           7
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ constructing level           8
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ rankmax_of_level:           8          10           6           6          11
+           7           5
+ 
+ Total construction time:   7.26706790924072      Seconds
+ Total construction flops:      5.68E+09
+ 
+   4.92914062500000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 7.29749 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  1.396465301513672E-002 Seconds
+ computing inverse block time:  2.490353584289551E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.737117767333984E-002
+      Time_RedistB:  4.632949829101562E-003
+      Time_RedistV:  1.000165939331055E-003
+ time_tmp  0.000000000000000E+000
+ Factorization flops:      1.96E+08
+ 
+   2.46365625000000      MB costed for butterfly inverse blocks
+   4.92914062500000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      7.27E+00 Seconds
+    Construction mem:      1.10E+01 MB
+  Construction flops:      5.68E+09
+  Factorization time:      2.49E-02 Seconds
+   Factorization mem:      1.35E+01 MB
+ Factorization flops:      1.96E+08
+          Solve time:      1.26E-03 Seconds
+         Solve flops:      8.14E+06
+         C_mult time:      8.96E-04 Seconds
+        C_mult flops:      7.51E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 7.3669e-17
+ Solve ......
+ Solve finished
+     
+# solution error = 9.55436e-07
+# Starting prediction step
+# prediction took 0.236121
+# prediction score: 69.5%
+
+srun: error: nid00096: task 0: Segmentation fault
+srun: Terminating job step 14789593.3
+srun: error: nid00097: task 1: Segmentation fault
+srun: error: nid00096: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00586255
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           8           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           8           9           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           8           9           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           8           9           2           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           8           9           2           4
+           3           0           0
+ constructing level           6
+ rankmax_of_level so far:           8           9           2           4
+           3           7           0
+ constructing level           7
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ constructing level           8
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ rankmax_of_level:           8          10           6           6          11
+           7           5
+ 
+ Total construction time:   7.24401402473450      Seconds
+ Total construction flops:      5.68E+09
+ 
+   4.92914062500000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 7.27543 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  1.387667655944824E-002 Seconds
+ computing inverse block time:  2.465391159057617E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.697397232055664E-002
+      Time_RedistB:  4.768133163452148E-003
+      Time_RedistV:  1.002550125122070E-003
+ time_tmp  0.000000000000000E+000
+ Factorization flops:      1.96E+08
+ 
+   2.46365625000000      MB costed for butterfly inverse blocks
+   4.92914062500000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      7.24E+00 Seconds
+    Construction mem:      1.10E+01 MB
+  Construction flops:      5.68E+09
+  Factorization time:      2.47E-02 Seconds
+   Factorization mem:      1.35E+01 MB
+ Factorization flops:      1.96E+08
+          Solve time:      1.25E-03 Seconds
+         Solve flops:      8.14E+06
+         C_mult time:      9.11E-04 Seconds
+        C_mult flops:      7.51E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 7.3669e-17
+ Solve ......
+ Solve finished
+     
+# solution error = 9.55436e-07
+# Starting prediction step
+# prediction took 0.236195
+# prediction score: 69.5%
+
+srun: error: nid00096: task 0: Segmentation fault
+srun: Terminating job step 14789593.5
+srun: error: nid00097: task 1: Segmentation fault
+srun: error: nid00096: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00582875
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           8           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           8           9           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           8           9           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           8           9           2           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           8           9           2           4
+           3           0           0
+ constructing level           6
+ rankmax_of_level so far:           8           9           2           4
+           3           7           0
+ constructing level           7
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ constructing level           8
+ rankmax_of_level so far:           8           9           2           4
+           3           7           4
+ rankmax_of_level:           8          10           6           6          11
+           7           5
+ 
+ Total construction time:   7.26662707328796      Seconds
+ Total construction flops:      5.68E+09
+ 
+   4.92914062500000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 7.29827 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  1.398873329162598E-002 Seconds
+ computing inverse block time:  2.567887306213379E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.797938346862793E-002
+      Time_RedistB:  4.761934280395508E-003
+      Time_RedistV:  9.803771972656250E-004
+ time_tmp  0.000000000000000E+000
+ Factorization flops:      1.96E+08
+ 
+   2.46365625000000      MB costed for butterfly inverse blocks
+   4.92914062500000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      7.27E+00 Seconds
+    Construction mem:      1.10E+01 MB
+  Construction flops:      5.68E+09
+  Factorization time:      2.57E-02 Seconds
+   Factorization mem:      1.35E+01 MB
+ Factorization flops:      1.96E+08
+          Solve time:      1.30E-03 Seconds
+         Solve flops:      8.14E+06
+         C_mult time:      1.01E-03 Seconds
+        C_mult flops:      7.51E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 7.3669e-17
+ Solve ......
+ Solve finished
+     
+# solution error = 9.55436e-07
+# Starting prediction step
+# prediction took 0.236281
+# prediction score: 69.5%
+
+srun: error: nid00097: task 1: Segmentation fault
+srun: Terminating job step 14789593.6
+srun: error: nid00096: task 0: Segmentation fault
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00586925
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           3           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           3           2           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           3           2           4           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           3           2           4           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           3           2           4           4
+           1           0           0
+ constructing level           6
+ rankmax_of_level so far:           3           2           4           4
+           1           4           0
+ constructing level           7
+ rankmax_of_level so far:           3           2           4           4
+           1           4           4
+ constructing level           8
+ rankmax_of_level so far:           3           2           4           4
+           1           4           4
+ rankmax_of_level:           3           4           4           7           4
+           4           4
+ 
+ Total construction time:  0.348994970321655      Seconds
+ Total construction flops:      2.83E+07
+ 
+   2.02392968750000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.381686 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  6.931781768798828E-003 Seconds
+ computing inverse block time:  1.272702217102051E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.180195808410645E-002
+      Time_RedistB:  3.726482391357422E-004
+      Time_RedistV:  3.843307495117188E-004
+ time_tmp  0.132509708404541     
+ Factorization flops:      1.69E+08
+ 
+  0.916218750000000      MB costed for butterfly inverse blocks
+   2.02392968750000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      3.49E-01 Seconds
+    Construction mem:      8.13E+00 MB
+  Construction flops:      2.83E+07
+  Factorization time:      1.27E-02 Seconds
+   Factorization mem:      9.04E+00 MB
+ Factorization flops:      1.69E+08
+          Solve time:      1.40E-03 Seconds
+         Solve flops:      7.00E+06
+         C_mult time:      7.98E-04 Seconds
+        C_mult flops:      6.77E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 6.98647e-17
+ Solve ......
+ Solve finished
+     
+# solution error = 0.000132002
+# Starting prediction step
+# prediction took 0.233621
+# prediction score: 69.5%
+
+srun: error: nid00097: task 1: Segmentation fault
+srun: Terminating job step 14789593.7
+srun: error: nid00096: task 0: Segmentation fault
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00599865
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           2           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           2           4           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           2           4           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           2           4           2           3
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           2           4           2           3
+           2           0           0
+ constructing level           6
+ rankmax_of_level so far:           2           4           2           3
+           2           5           0
+ constructing level           7
+ rankmax_of_level so far:           2           4           2           3
+           2           5           4
+ constructing level           8
+ rankmax_of_level so far:           2           4           2           3
+           2           5           4
+ rankmax_of_level:           2           4           2           7           4
+           5           6
+ 
+ Total construction time:  0.349786996841431      Seconds
+ Total construction flops:      2.43E+07
+ 
+   1.75408593750000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.38251 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  6.743907928466797E-003 Seconds
+ computing inverse block time:  1.161384582519531E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.068425178527832E-002
+      Time_RedistB:  3.111362457275391E-004
+      Time_RedistV:  3.857612609863281E-004
+ time_tmp  0.133243799209595     
+ Factorization flops:      1.68E+08
+ 
+  0.868656250000000      MB costed for butterfly inverse blocks
+   1.75408593750000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      3.50E-01 Seconds
+    Construction mem:      7.86E+00 MB
+  Construction flops:      2.43E+07
+  Factorization time:      1.16E-02 Seconds
+   Factorization mem:      8.73E+00 MB
+ Factorization flops:      1.68E+08
+          Solve time:      1.34E-03 Seconds
+         Solve flops:      6.92E+06
+         C_mult time:      9.55E-04 Seconds
+        C_mult flops:      6.70E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 6.95021e-17
+ Solve ......
+ Solve finished
+     
+# solution error = 0.000132067
+# Starting prediction step
+# prediction took 0.224579
+# prediction score: 69.5%
+
+srun: error: nid00097: task 1: Segmentation fault
+srun: Terminating job step 14789593.8
+srun: error: nid00096: task 0: Segmentation fault
+srun: error: nid00097: task 1: Segmentation fault
+srun: error: Task 1 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00583893
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           1           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           1           2           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           1           2           4           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           1           2           4           3
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           1           2           4           3
+           2           0           0
+ constructing level           6
+ rankmax_of_level so far:           1           2           4           3
+           2           2           0
+ constructing level           7
+ rankmax_of_level so far:           1           2           4           3
+           2           2           4
+ constructing level           8
+ rankmax_of_level so far:           1           2           4           3
+           2           2           4
+ rankmax_of_level:           2           3           4           7           4
+           4           4
+ 
+ Total construction time:  0.356641054153442      Seconds
+ Total construction flops:      2.45E+07
+ 
+   1.77122656250000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.390419 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  6.393909454345703E-003 Seconds
+ computing inverse block time:  1.173114776611328E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.085662841796875E-002
+      Time_RedistB:  2.703666687011719E-004
+      Time_RedistV:  3.483295440673828E-004
+ time_tmp  5.517959594726562E-002
+ Factorization flops:      1.68E+08
+ 
+  0.840578125000000      MB costed for butterfly inverse blocks
+   1.77122656250000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      3.57E-01 Seconds
+    Construction mem:      7.87E+00 MB
+  Construction flops:      2.45E+07
+  Factorization time:      1.17E-02 Seconds
+   Factorization mem:      8.72E+00 MB
+ Factorization flops:      1.68E+08
+          Solve time:      1.28E-03 Seconds
+         Solve flops:      6.92E+06
+         C_mult time:      9.60E-04 Seconds
+        C_mult flops:      6.70E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 7.02781e-17
+# Starting prediction step
+# prediction took 0.224494
+# prediction score: 69.5%
+
+srun: error: nid00096: task 0: Segmentation fault
+srun: Terminating job step 14789593.11
+srun: error: nid00097: task 1: Segmentation fault
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00609149
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           2           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           2           1           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           2           1           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           2           1           2           2
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           2           1           2           2
+           2           0           0
+ constructing level           6
+ rankmax_of_level so far:           2           1           2           2
+           2           3           0
+ constructing level           7
+ rankmax_of_level so far:           2           1           2           2
+           2           3           4
+ constructing level           8
+ rankmax_of_level so far:           2           1           2           2
+           2           3           4
+ rankmax_of_level:           2           1           4           7           4
+           4           4
+ 
+ Total construction time:  0.452962875366211      Seconds
+ Total construction flops:      1.68E+07
+ 
+   1.64547656250000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.493373 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  5.917787551879883E-003 Seconds
+ computing inverse block time:  1.129436492919922E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.047372817993164E-002
+      Time_RedistB:  2.918243408203125E-004
+      Time_RedistV:  3.092288970947266E-004
+ time_tmp  0.194211721420288     
+ Factorization flops:      1.67E+08
+ 
+  0.860093750000000      MB costed for butterfly inverse blocks
+   1.64547656250000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      4.53E-01 Seconds
+    Construction mem:      7.75E+00 MB
+  Construction flops:      1.68E+07
+  Factorization time:      1.13E-02 Seconds
+   Factorization mem:      8.61E+00 MB
+ Factorization flops:      1.67E+08
+          Solve time:      1.16E-03 Seconds
+         Solve flops:      6.89E+06
+         C_mult time:      7.93E-04 Seconds
+        C_mult flops:      6.67E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 6.96792e-17
+# Starting prediction step
+# prediction took 0.225987
+# prediction score: 69.5%
+
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+srun: error: nid00096: task 0: Exited with exit code 1
+srun: Terminating job step 14789593.12
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00579662
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           1           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           1           1           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           1           1           1           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           1           1           1           5
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           1           1           1           5
+           3           0           0
+ constructing level           6
+ rankmax_of_level so far:           1           1           1           5
+           3           5           0
+ constructing level           7
+ rankmax_of_level so far:           1           1           1           5
+           3           5           4
+ constructing level           8
+ rankmax_of_level so far:           1           1           1           5
+           3           5           4
+ rankmax_of_level:           1           5           4           7           5
+           5           4
+ 
+ Total construction time:  0.340001106262207      Seconds
+ Total construction flops:      1.72E+07
+ 
+   1.70653125000000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.372528 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.168201 seconds, per vector 0.00121885 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 14
+# memory(K) = 6.61942 MB 
+#HSS compression took 0.705189
+# compression flops = 0
+factorization start
+# factorization time = 0.046985
+# factorization flops = 0
+solve start
+# solve time = 0.0154362
+# solve flops = 0
+# total time (comp + fact): 0.767634
+   Construction time:      3.40E-01 Seconds
+    Construction mem:      7.81E+00 MB
+  Construction flops:      1.72E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.08E-01 Seconds
+        C_mult flops:      9.23E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.66667e-16
+# solution error = 0.00013208
+# Starting prediction step
+# prediction took 0.223818
+# prediction score: 69.5%
+
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: Terminating job step 14789593.15
+srun: error: nid00096: task 0: Exited with exit code 1
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: error: Task 1 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00580568
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           3           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           3           2           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           3           2           3           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           3           2           3           1
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           3           2           3           1
+           1           0           0
+ constructing level           6
+ rankmax_of_level so far:           3           2           3           1
+           1           5           0
+ constructing level           7
+ rankmax_of_level so far:           3           2           3           1
+           1           5           4
+ constructing level           8
+ rankmax_of_level so far:           3           2           3           1
+           1           5           4
+ rankmax_of_level:           3           4           3           7           4
+           5           5
+ 
+ Total construction time:  0.353234052658081      Seconds
+ Total construction flops:      3.18E+07
+ 
+   2.05439843750000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.385864 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.169715 seconds, per vector 0.00122982 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 13
+# memory(K) = 6.63178 MB 
+#HSS compression took 0.703595
+# compression flops = 0
+factorization start
+# factorization time = 0.0452845
+# factorization flops = 0
+solve start
+# solve time = 0.0158311
+# solve flops = 0
+# total time (comp + fact): 0.764733
+   Construction time:      3.53E-01 Seconds
+    Construction mem:      8.16E+00 MB
+  Construction flops:      3.18E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.10E-01 Seconds
+        C_mult flops:      9.35E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.64714e-16
+# solution error = 0.000132145
+# Starting prediction step
+# prediction took 0.224686
+# prediction score: 69.5%
+
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: Terminating job step 14789593.19
+srun: error: nid00096: task 0: Exited with exit code 1
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: error: Task 1 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00601422
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           1           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           1           1           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           1           1           3           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           1           1           3           1
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           1           1           3           1
+           2           0           0
+ constructing level           6
+ rankmax_of_level so far:           1           1           3           1
+           2           2           0
+ constructing level           7
+ rankmax_of_level so far:           1           1           3           1
+           2           2           4
+ constructing level           8
+ rankmax_of_level so far:           1           1           3           1
+           2           2           4
+ rankmax_of_level:           1           5           3           7           4
+           4           4
+ 
+ Total construction time:  0.349967002868652      Seconds
+ Total construction flops:      2.53E+07
+ 
+   1.57957031250000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.384616 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.170708 seconds, per vector 0.00123701 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 12
+# memory(K) = 6.61198 MB 
+#HSS compression took 0.705518
+# compression flops = 0
+factorization start
+# factorization time = 0.0467244
+# factorization flops = 0
+solve start
+# solve time = 0.01622
+# solve flops = 0
+# total time (comp + fact): 0.768482
+   Construction time:      3.50E-01 Seconds
+    Construction mem:      7.68E+00 MB
+  Construction flops:      2.53E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.11E-01 Seconds
+        C_mult flops:      9.18E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.59907e-16
+# solution error = 0.000128917
+# Starting prediction step
+# prediction took 0.226558
+# prediction score: 69.5%
+
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+srun: error: nid00096: task 0: Exited with exit code 1
+srun: Terminating job step 14789593.21
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: error: nid00096: task 0: Exited with exit code 1
+srun: error: Task 0 reported exit for a second time.
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: error: Task 1 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00570011
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           1           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           1           1           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           1           1           1           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           1           1           1           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           1           1           1           4
+           1           0           0
+ constructing level           6
+ rankmax_of_level so far:           1           1           1           4
+           1           3           0
+ constructing level           7
+ rankmax_of_level so far:           1           1           1           4
+           1           3           4
+ constructing level           8
+ rankmax_of_level so far:           1           1           1           4
+           1           3           4
+ rankmax_of_level:           2           2           3           7           4
+           4           5
+ 
+ Total construction time:  0.343956947326660      Seconds
+ Total construction flops:      2.24E+07
+ 
+   1.76753906250000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.376794 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.170136 seconds, per vector 0.00123287 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 16
+# memory(K) = 6.64597 MB 
+#HSS compression took 0.71015
+# compression flops = 0
+factorization start
+# factorization time = 0.0460715
+# factorization flops = 0
+solve start
+# solve time = 0.0141923
+# solve flops = 0
+# total time (comp + fact): 0.770436
+   Construction time:      3.44E-01 Seconds
+    Construction mem:      7.87E+00 MB
+  Construction flops:      2.24E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.11E-01 Seconds
+        C_mult flops:      9.25E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.69792e-16
+# solution error = 0.00013208
+# Starting prediction step
+# prediction took 0.227065
+# prediction score: 69.5%
+
+srun: error: nid00096: task 0: Segmentation fault
+srun: Terminating job step 14789593.22
+srun: error: nid00097: task 1: Segmentation fault
+srun: error: nid00096: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00573751
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           1           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           1           2           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           1           2           3           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           1           2           3           2
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           1           2           3           2
+           2           0           0
+ constructing level           6
+ rankmax_of_level so far:           1           2           3           2
+           2           3           0
+ constructing level           7
+ rankmax_of_level so far:           1           2           3           2
+           2           3           4
+ constructing level           8
+ rankmax_of_level so far:           1           2           3           2
+           2           3           4
+ rankmax_of_level:           3           2           5           7           4
+           5           4
+ 
+ Total construction time:  0.342769145965576      Seconds
+ Total construction flops:      2.02E+07
+ 
+   1.84935156250000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.375361 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.169871 seconds, per vector 0.00123095 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 14
+# memory(K) = 6.61374 MB 
+#HSS compression took 0.705346
+# compression flops = 0
+factorization start
+# factorization time = 0.0447572
+# factorization flops = 0
+solve start
+# solve time = 0.0142331
+# solve flops = 0
+# total time (comp + fact): 0.764359
+   Construction time:      3.43E-01 Seconds
+    Construction mem:      7.95E+00 MB
+  Construction flops:      2.02E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.10E-01 Seconds
+        C_mult flops:      9.28E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.68169e-16
+# solution error = 0.000131999
+# Starting prediction step
+# prediction took 0.225817
+# prediction score: 69.5%
+
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+srun: error: nid00096: task 0: Exited with exit code 1
+srun: Terminating job step 14789593.23
+srun: error: nid00097: task 1: Exited with exit code 1
+srun: error: nid00096: task 0: Exited with exit code 1
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00582162
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           3           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           3           1           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           3           1           3           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           3           1           3           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           3           1           3           4
+           1           0           0
+ constructing level           6
+ rankmax_of_level so far:           3           1           3           4
+           1           3           0
+ constructing level           7
+ rankmax_of_level so far:           3           1           3           4
+           1           3           4
+ constructing level           8
+ rankmax_of_level so far:           3           1           3           4
+           1           3           4
+ rankmax_of_level:           3           5           5           7           4
+           4           4
+ 
+ Total construction time:  0.348325014114380      Seconds
+ Total construction flops:      3.05E+07
+ 
+   1.97627343750000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.381358 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.169422 seconds, per vector 0.0012277 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 16
+# memory(K) = 6.63598 MB 
+#HSS compression took 0.702004
+# compression flops = 0
+factorization start
+# factorization time = 0.0450962
+# factorization flops = 0
+solve start
+# solve time = 0.0157107
+# solve flops = 0
+# total time (comp + fact): 0.762835
+   Construction time:      3.48E-01 Seconds
+    Construction mem:      8.08E+00 MB
+  Construction flops:      3.05E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.09E-01 Seconds
+        C_mult flops:      9.32E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.68235e-16
+# solution error = 0.000132026
+# Starting prediction step
+# prediction took 0.226356
+# prediction score: 69.5%
+
+srun: error: nid00096: task 0: Segmentation fault
+srun: Terminating job step 14789593.24
+srun: error: nid00097: task 1: Segmentation fault
+srun: error: nid00096: task 0: Segmentation fault
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00581782
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           2           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           2           1           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           2           1           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           2           1           2           4
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           2           1           2           4
+           3           0           0
+ constructing level           6
+ rankmax_of_level so far:           2           1           2           4
+           3           4           0
+ constructing level           7
+ rankmax_of_level so far:           2           1           2           4
+           3           4           4
+ constructing level           8
+ rankmax_of_level so far:           2           1           2           4
+           3           4           4
+ rankmax_of_level:           2           5           4           7           4
+           4           4
+ 
+ Total construction time:  0.363534927368164      Seconds
+ Total construction flops:      2.41E+07
+ 
+   1.87985937500000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.396344 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.169537 seconds, per vector 0.00122853 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 11
+# memory(K) = 6.62242 MB 
+#HSS compression took 0.713003
+# compression flops = 0
+factorization start
+# factorization time = 0.0448119
+# factorization flops = 0
+solve start
+# solve time = 0.0166501
+# solve flops = 0
+# total time (comp + fact): 0.774485
+   Construction time:      3.64E-01 Seconds
+    Construction mem:      7.98E+00 MB
+  Construction flops:      2.41E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.10E-01 Seconds
+        C_mult flops:      9.29E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.64691e-16
+# solution error = 0.000132027
+# Starting prediction step
+# prediction took 0.227071
+# prediction score: 69.5%
+
+srun: Warning: can't run 1 processes on 64 nodes, setting nnodes to 1
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00566149
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           1
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           3           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           3           2           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           3           2           5           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           3           2           5           7
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           3           2           5           7
+           4           0           0
+ constructing level           6
+ rankmax_of_level so far:           3           2           5           7
+           4           5           0
+ constructing level           7
+ rankmax_of_level so far:           3           2           5           7
+           4           5           5
+ constructing level           8
+ rankmax_of_level so far:           3           2           5           7
+           4           5           5
+ rankmax_of_level:           3           2           5           7           4
+           5           5
+ 
+ Total construction time:  0.423828125000000      Seconds
+ Total construction flops:      2.52E+07
+ 
+   1.89079687500001      MB costed for butterfly forward blocks
+   6.10362499999998      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.447593 seconds
+Rank 0 [Thu Sep 13 12:22:39 2018] [c0-0c1s8n0] Fatal error in PMPI_Group_incl: Invalid rank, error stack:
+PMPI_Group_incl(172).............: MPI_Group_incl(group=0x88000000, n=1, ranks=0x7fffffff5ba8, new_group=0x7fffffff5b90) failed
+MPIR_Group_check_valid_ranks(250): Invalid rank in rank array at index 0; value is 1 but must be in the range 0 to 0
+srun: error: nid00096: task 0: Aborted
+srun: Terminating job step 14789593.26
+srun: error: nid00096: task 0: Aborted
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00589135
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           1           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           1           2           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           1           2           5           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           1           2           5           1
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           1           2           5           1
+           1           0           0
+ constructing level           6
+ rankmax_of_level so far:           1           2           5           1
+           1           4           0
+ constructing level           7
+ rankmax_of_level so far:           1           2           5           1
+           1           4           4
+ constructing level           8
+ rankmax_of_level so far:           1           2           5           1
+           1           4           4
+ rankmax_of_level:           2           2           5           7           4
+           4           4
+ 
+ Total construction time:  0.372028827667236      Seconds
+ Total construction flops:      2.53E+07
+ 
+   1.73825781250000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.405681 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.178991 seconds, per vector 0.00129704 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 8
+# memory(K) = 6.61331 MB 
+#HSS compression took 0.73171
+# compression flops = 0
+factorization start
+# factorization time = 0.0456206
+# factorization flops = 0
+solve start
+# solve time = 0.0165281
+# solve flops = 0
+# total time (comp + fact): 0.793881
+   Construction time:      3.72E-01 Seconds
+    Construction mem:      7.84E+00 MB
+  Construction flops:      2.53E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.11E-01 Seconds
+        C_mult flops:      9.24E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.62491e-16
+# solution error = 0.000132146
+# Starting prediction step
+# prediction took 0.225738
+# prediction score: 69.5%
+
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00592367
+# HSS compression .. 
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 25
+# memory(K) = 7.65865 MB 
+#HSS compression took 2.33028
+# compression flops = 0
+factorization start
+# factorization time = 0.0555139
+# factorization flops = 0
+solve start
+# solve time = 0.0287755
+# solve flops = 0
+# total time (comp + fact): 2.41459
+Rank 0 [Thu Sep 13 12:51:52 2018] [c0-0c1s8n0] Fatal error in MPI_Allreduce: Invalid communicator, error stack:
+MPI_Allreduce(1000): MPI_Allreduce(sbuf=0x7fff00000991, rbuf=0x7fffffff5b10, count=1, MPI_DOUBLE_PRECISION, MPI_MAX, comm=0x2aaa) failed
+MPI_Allreduce(919).: Invalid communicator
+Rank 1 [Thu Sep 13 12:51:52 2018] [c0-0c1s8n1] Fatal error in MPI_Allreduce: Invalid communicator, error stack:
+MPI_Allreduce(1000): MPI_Allreduce(sbuf=0x7fff00000991, rbuf=0x7fffffff5b10, count=1, MPI_DOUBLE_PRECISION, MPI_MAX, comm=0x2aaa) failed
+MPI_Allreduce(919).: Invalid communicator
+srun: error: nid00096: task 0: Aborted
+srun: Terminating job step 14789593.28
+srun: error: nid00097: task 1: Aborted
+srun: error: nid00096: task 0: Aborted
+srun: error: Task 0 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00586866
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+    
+ -------------------------------Program Start----------------------------------
+    
+ MLMDA_DIRECT_SOLVER_3D_CFIE_MPI
+ FOR X64 COMPILER
+ lambda   10.0000000000000     
+ h  0.100000001490116     
+    
+ 
+ CFIE computing
+ num of MPI Processors:           2
+ num of OpenMP Threads:           1
+ wavelength:  5.000000074505806E-002
+ 
+ constructing MLMDA format......
+ 
+ Maxlevel_for_blocks:           5
+ 
+ Constructing basis groups...
+ level:           0 finished  7.8125000E-03 seconds cost
+ level:           1 finished  3.9062500E-03 seconds cost
+ level:           2 finished  0.0000000E+00 seconds cost
+ level:           3 finished  0.0000000E+00 seconds cost
+ level:           4 finished  0.0000000E+00 seconds cost
+ level:           5 finished  3.9062500E-03 seconds cost
+ 
+ Determining leaf-blocks...
+ 
+ Near or Far admissible parameter:  0.100000001490116     
+ Level:           1           0
+ Level:           2           8
+ Level:           3          18
+ Level:           4          32
+ Level:           5          96
+ MLMDA formatting finished
+     
+ MLMDA impedance matrix filling......
+ 
+ ACA error threshold  1.000000000000000E-002
+ SVD error threshold  1.000000000000000E-002
+ 
+ Forward method: ACA_full
+ Filling Leaf-blocks......
+    
+           2 total blocks
+     1  blocks finished 5.0564601E+00  secnds 1.4400000E+00  Mbytes
+     2  blocks finished 4.1613472E+00  secnds 1.4220032E+01  Mbytes
+ 
+ Total filling time:   9.24326086044312      Seconds
+ 
+ rankmax_of_level           0          14          12          13           8
+   35.4752480000000      MB costed for  MLMDA blcocks
+   28.1150720000000      MB costed for near field blocks
+ 
+ MLMDA filling finished
+     
+# H Matrix construction time 9.34911 seconds
+ before kernel apply time:   6.223917007446289E-003
+ kernel apply time:   0.235321044921875     
+ after kernel apply time:   3.787994384765625E-003
+ output norm:    12902.1079987835     
+# Apply time 0.310043 seconds, per vector 0.00224669 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 115
+# memory(K) = 9.96663 MB 
+#HSS compression took 9.90476
+# compression flops = 0
+factorization start
+# factorization time = 0.0692566
+# factorization flops = 0
+solve start
+# solve time = 0.0164173
+# solve flops = 0
+# total time (comp + fact): 9.99046
+Rank 1 [Thu Sep 13 12:55:10 2018] [c0-0c1s8n1] Fatal error in MPI_Allreduce: Invalid communicator, error stack:
+MPI_Allreduce(1000): MPI_Allreduce(sbuf=0x7fff00000991, rbuf=0x7fffffff5b10, count=1, MPI_DOUBLE_PRECISION, MPI_MAX, comm=0x2aaa) failed
+MPI_Allreduce(919).: Invalid communicator
+Rank 0 [Thu Sep 13 12:55:10 2018] [c0-0c1s8n0] Fatal error in MPI_Allreduce: Invalid communicator, error stack:
+MPI_Allreduce(1000): MPI_Allreduce(sbuf=0x7fff00000991, rbuf=0x7fffffff5b10, count=1, MPI_DOUBLE_PRECISION, MPI_MAX, comm=0x2aaa) failed
+MPI_Allreduce(919).: Invalid communicator
+srun: error: nid00097: task 1: Aborted
+srun: Terminating job step 14789593.29
+srun: error: nid00096: task 0: Aborted
+srun: error: nid00097: task 1: Aborted
+srun: error: Task 1 reported exit for a second time.
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00585759
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           3           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           3           3           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           3           3           2           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           3           3           2           2
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           3           3           2           2
+           1           0           0
+ constructing level           6
+ rankmax_of_level so far:           3           3           2           2
+           1           3           0
+ constructing level           7
+ rankmax_of_level so far:           3           3           2           2
+           1           3           4
+ constructing level           8
+ rankmax_of_level so far:           3           3           2           2
+           1           3           4
+ rankmax_of_level:           3           3           3           7           4
+           5           4
+ 
+ Total construction time:  0.348789930343628      Seconds
+ Total construction flops:      2.16E+07
+ 
+   1.82743750000000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.382127 seconds
+ Multiply ......
+ Multiply finished
+     
+# Apply time 0.169698 seconds, per vector 0.0012297 seconds
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 11
+# memory(K) = 6.60481 MB 
+#HSS compression took 0.69768
+# compression flops = 0
+factorization start
+# factorization time = 0.0445936
+# factorization flops = 0
+solve start
+# solve time = 0.0140905
+# solve flops = 0
+# total time (comp + fact): 0.756385
+   Construction time:      3.49E-01 Seconds
+    Construction mem:      7.93E+00 MB
+  Construction flops:      2.16E+07
+  Factorization time:      0.00E+00 Seconds
+   Factorization mem:      0.00E+00 MB
+ Factorization flops:      0.00E+00
+          Solve time:      0.00E+00 Seconds
+         Solve flops:      0.00E+00
+         C_mult time:      1.09E-01 Seconds
+        C_mult flops:      9.27E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.6071e-16
+# solution error = 0.000132079
+# Starting prediction step
+# prediction took 0.225556
+# prediction score: 69.5%
+
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.0059012
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=           2
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           7
+ N_leaf:          78
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:           3           0           0           0
+           0           0           0
+ constructing level           2
+ rankmax_of_level so far:           3           3           0           0
+           0           0           0
+ constructing level           3
+ rankmax_of_level so far:           3           3           3           0
+           0           0           0
+ constructing level           4
+ rankmax_of_level so far:           3           3           3           3
+           0           0           0
+ constructing level           5
+ rankmax_of_level so far:           3           3           3           3
+           2           0           0
+ constructing level           6
+ rankmax_of_level so far:           3           3           3           3
+           2           3           0
+ constructing level           7
+ rankmax_of_level so far:           3           3           3           3
+           2           3           4
+ constructing level           8
+ rankmax_of_level so far:           3           3           3           3
+           2           3           4
+ rankmax_of_level:           3           4           6           7           4
+           4           4
+ 
+ Total construction time:  0.344678163528442      Seconds
+ Total construction flops:      2.60E+07
+ 
+   2.00923437500000      MB costed for butterfly forward blocks
+   6.10362500000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 0.378474 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  7.178783416748047E-003 Seconds
+ computing inverse block time:  1.547789573669434E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  1.281738281250000E-002
+      Time_RedistB:  2.140283584594727E-003
+      Time_RedistV:  3.352165222167969E-004
+ time_tmp  0.134796619415283     
+ Factorization flops:      1.69E+08
+ 
+  0.819812500000000      MB costed for butterfly inverse blocks
+   2.00923437500000      MB costed for butterfly Sblocks
+   6.10362500000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      3.45E-01 Seconds
+    Construction mem:      8.11E+00 MB
+  Construction flops:      2.60E+07
+  Factorization time:      1.55E-02 Seconds
+   Factorization mem:      8.93E+00 MB
+ Factorization flops:      1.69E+08
+          Solve time:      1.32E-03 Seconds
+         Solve flops:      6.97E+06
+         C_mult time:      8.83E-04 Seconds
+        C_mult flops:      6.76E+06
+# relative error = ||B-H*(H\B)||_F/||B||_F = 7.00761e-17
+ Solve ......
+ Solve finished
+     
+# solution error = 0.000131731
+# Starting prediction step
+# prediction took 0.225039
+# prediction score: 69.5%
+
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00576488
+# HSS compression .. 
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 25
+# memory(K) = 7.65865 MB 
+#HSS compression took 2.3379
+# compression flops = 0
+factorization start
+# factorization time = 0.0557675
+# factorization flops = 0
+solve start
+# solve time = 0.0287069
+# solve flops = 0
+# total time (comp + fact): 2.4224
+Rank 0 [Thu Sep 13 12:58:50 2018] [c0-0c1s8n0] Fatal error in MPI_Allreduce: Invalid communicator, error stack:
+MPI_Allreduce(1000): MPI_Allreduce(sbuf=0x7fff00000991, rbuf=0x7fffffff5b10, count=1, MPI_DOUBLE_PRECISION, MPI_MAX, comm=0x2aaa) failed
+MPI_Allreduce(919).: Invalid communicator
+Rank 1 [Thu Sep 13 12:58:50 2018] [c0-0c1s8n1] Fatal error in MPI_Allreduce: Invalid communicator, error stack:
+MPI_Allreduce(1000): MPI_Allreduce(sbuf=0x991, rbuf=0x7fffffff5b10, count=1, MPI_DOUBLE_PRECISION, MPI_MAX, comm=0x2aaa) failed
+MPI_Allreduce(919).: Invalid communicator
+srun: error: nid00097: task 1: Aborted
+srun: Terminating job step 14789593.32
+srun: error: nid00096: task 0: Aborted
+srun: Warning: can't run 2 processes on 64 nodes, setting nnodes to 2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 2
+# validation/test = test
+# matrix size = 10000 x 8
+# Preprocessing data...
+# Preprocessing took 0.00587678
+# HSS compression .. 
+# compressing with d = 128 + 10 (original)
+# created K matrix of dimension 10000 x 10000 with 8 levels
+# compression succeeded!
+# rank(K) = 25
+# memory(K) = 7.65865 MB 
+#HSS compression took 2.36265
+# compression flops = 0
+factorization start
+# factorization time = 0.0551968
+# factorization flops = 0
+solve start
+# solve time = 0.0315503
+# solve flops = 0
+# total time (comp + fact): 2.44942
+# relative error = ||B-H*(H\B)||_F/||B||_F = 3.96345e-16
+# solution error = 1.11661e-06
+# Starting prediction step
+# prediction took 0.224139
+# prediction score: 69.5%
+

@@ -330,8 +330,8 @@ void recursive_2_means(double *p, int n, int d, int cluster_size,
   delete[] nc;
 }
 
-void kd_partition(double *p, int n, int d, int *nc, double *labels,
-                  int cluster_size) {
+
+void kd_partition(double *p, int n, int d, int *nc, double *labels) {
   // find coordinate of the most spread
   double *maxes = new double[d];
   double *mins = new double[d];
@@ -360,73 +360,99 @@ void kd_partition(double *p, int n, int d, int *nc, double *labels,
     }
   }
 
+   
+  
+  std::vector<std::pair<double, int>> dat_MD;
+  dat_MD.resize(n);
+  for (int i=0;i<n;++i){
+	dat_MD.data()[i].first = p[i * d + dim];
+	dat_MD.data()[i].second = i;
+  } 
+  std::sort(dat_MD.begin(), dat_MD.end());  
+  double *p_perm = new double[n * d];
+  double *labels_perm = new double[n];
+  for (int row=0; row<n; ++row){
+  for (int l = 0; l < d; l++)
+    p_perm[l + row * d] = p[l + dat_MD.data()[row].second * d]; 
+	labels_perm[row] = labels[dat_MD.data()[row].second]; 
+  }  
+  dat_MD.clear();
+  
+#if 1  // split by median
+  nc[0] = floor((double)n/2.0);
+  nc[1] = n - nc[0];  
+#else // split by mean  
   // find the mean
   double mean_value = 0.;
   for (int i = 0; i < n; ++i) {
-    mean_value += p[i * d + dim];
+    mean_value += p_perm[i * d + dim];
   }
-  mean_value /= n;
+  mean_value /= n;  
 
-  // split the data
-  int *cluster = new int[n];
-  for (int i = 0; i < n; i++) {
-    cluster[i] = 0;
-  }
   nc[0] = 0;
   nc[1] = 0;
   for (int i = 0; i < n; ++i) {
-    if (p[d * i + dim] > mean_value) {
-      cluster[i] = 1;
+    if (p_perm[d * i + dim] > mean_value) {
       nc[1] += 1;
     } else {
       nc[0] += 1;
     }
   }
 
-  // if clusters are too disbalanced, assign trivial clusters
-
-  if ((nc[0] < cluster_size && nc[1] > 100 * cluster_size) ||
-      (nc[1] < cluster_size && nc[0] > 100 * cluster_size)) {
-    nc[0] = 0;
-    nc[1] = 0;
-    for (int i = 0; i < n; i++) {
-      if (i <= n / 2) {
-        cluster[i] = 0;
-        nc[0] += 1;
-      } else {
-        cluster[i] = 1;
-        nc[1] += 1;
-      }
-    }
-  }
-  // permute the data
-
-  int *ci = new int[2];
-  for (int c = 0; c < 2; c++)
-    ci[c] = 0;
-  double *p_perm = new double[n * d];
-  double *labels_perm = new double[n];
-  int row = 0;
-  for (int c = 0; c < 2; c++) {
-    for (int j = 0; j < nc[c]; j++) {
-      while (cluster[ci[c]] != c)
-        ci[c]++;
-      for (int l = 0; l < d; l++)
-        p_perm[l + row * d] = p[l + ci[c] * d];
-      labels_perm[row] = labels[ci[c]];
-      ci[c]++;
-      row++;
-    }
-  }
-
+#endif  
+  
+  
   copy(p_perm, p_perm + n * d, p);
   copy(labels_perm, labels_perm + n, labels);
   delete[] p_perm;
   delete[] labels_perm;
-  delete[] ci;
   delete[] maxes;
   delete[] mins;
-  delete[] cluster;
+  
+  // // split the data
+  // int *cluster = new int[n];
+  // for (int i = 0; i < n; i++) {
+    // cluster[i] = 0;
+  // }
+  // nc[0] = 0;
+  // nc[1] = 0;
+  // for (int i = 0; i < n; ++i) {
+    // if (p[d * i + dim] > mean_value) {
+      // cluster[i] = 1;
+      // nc[1] += 1;
+    // } else {
+      // nc[0] += 1;
+    // }
+  // }
+
+  // // permute the data
+
+  // int *ci = new int[2];
+  // for (int c = 0; c < 2; c++)
+    // ci[c] = 0;
+  // double *p_perm = new double[n * d];
+  // double *labels_perm = new double[n];
+  // int row = 0;
+  // for (int c = 0; c < 2; c++) {
+    // for (int j = 0; j < nc[c]; j++) {
+      // while (cluster[ci[c]] != c)
+        // ci[c]++;
+      // for (int l = 0; l < d; l++)
+        // p_perm[l + row * d] = p[l + ci[c] * d];
+      // labels_perm[row] = labels[ci[c]];
+      // ci[c]++;
+      // row++;
+    // }
+  // }
+
+  // copy(p_perm, p_perm + n * d, p);
+  // copy(labels_perm, labels_perm + n, labels);
+  // delete[] p_perm;
+  // delete[] labels_perm;
+  // delete[] ci;
+  // delete[] maxes;
+  // delete[] mins;
+  // delete[] cluster;
 }
 
 void recursive_kd(double *p, int n, int d, int cluster_size,
@@ -434,7 +460,7 @@ void recursive_kd(double *p, int n, int d, int cluster_size,
   if (n < cluster_size)
     return;
   auto nc = new int[2];
-  kd_partition(p, n, d, nc, labels, cluster_size);
+  kd_partition(p, n, d, nc, labels);
   if (nc[0] == 0 || nc[1] == 0)
     return;
   tree.c.resize(2);
@@ -442,6 +468,94 @@ void recursive_kd(double *p, int n, int d, int cluster_size,
   tree.c[1].size = nc[1];
   recursive_kd(p, nc[0], d, cluster_size, tree.c[0], labels);
   recursive_kd(p + nc[0] * d, nc[1], d, cluster_size, tree.c[1],
+               labels + nc[0]);
+  delete[] nc;
+}
+
+
+
+void cobble_partition(double *p, int n, int d, int *nc, double *labels) {
+
+  // find centroid
+  double centroid[d];
+
+  for (int i = 0; i < d; i++) {
+    centroid[i] = 0;
+  }
+
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < d; j++) {
+      centroid[j] += p[i * d + j];
+    }
+  }
+
+  for (int j = 0; j < d; j++)
+    centroid[j] /= n;
+
+  // find farthest point from centroid
+  int first_index = 0;
+  double max_dist = -1;
+
+  for (int i = 0; i < n; i++) {
+    double dd = dist(&p[i * d], centroid, d);
+    if (dd > max_dist) {
+      max_dist = dd;
+      first_index = i;
+    }
+  }
+
+  // compute and sort distance from the firsth point
+  std::vector<double> dists;
+  dists.resize(n);
+  for (int i = 0; i < n; i++) {
+    dists[i] = dist(&p[i * d], &p[first_index * d], d);
+  }
+  
+  std::vector<std::pair<double, int>> dat_MD;
+  dat_MD.resize(n);
+  for (int i=0;i<n;++i){
+	dat_MD.data()[i].first = dists[i];
+	dat_MD.data()[i].second = i;
+  } 
+  std::sort(dat_MD.begin(), dat_MD.end());  
+  
+  double *p_perm = new double[n * d];
+  double *labels_perm = new double[n];
+  for (int row=0; row<n; ++row){
+  // cout<<dat_MD.data()[row].first<<""<<dat_MD.data()[row].second<<endl;
+  for (int l = 0; l < d; l++)
+    p_perm[l + row * d] = p[l + dat_MD.data()[row].second * d]; 
+	labels_perm[row] = labels[dat_MD.data()[row].second]; 
+  }  
+  dat_MD.clear();
+  dists.clear();
+  
+  nc[0] = floor((double)n/2.0);
+  nc[1] = n - nc[0];    
+  
+  copy(p_perm, p_perm + n * d, p);
+  copy(labels_perm, labels_perm + n, labels);
+  delete[] p_perm;
+  delete[] labels_perm;
+
+}
+
+
+
+
+void recursive_cobble(double *p, int n, int d, int cluster_size,
+                  HSSPartitionTree &tree, double *labels) {
+  if (n < cluster_size)
+    return;
+  auto nc = new int[2];
+  cobble_partition(p, n, d, nc, labels);
+  if (nc[0] == 0 || nc[1] == 0)
+    return;
+  tree.c.resize(2);
+  tree.c[0].size = nc[0];
+  tree.c[1].size = nc[1];
+  recursive_cobble(p, nc[0], d, cluster_size, tree.c[0], labels);
+  recursive_cobble(p + nc[0] * d, nc[1], d, cluster_size, tree.c[1],
                labels + nc[0]);
   delete[] nc;
 }
@@ -1064,6 +1178,9 @@ int main(int argc, char *argv[]) {
   if (reorder == "2means") {
     recursive_2_means(data_train.data(), n, d, cluster_size, cluster_tree,
                       data_train_label.data());
+  } else if (reorder == "cob") {
+    recursive_cobble(data_train.data(), n, d, cluster_size, cluster_tree,
+                 data_train_label.data());  					  
   } else if (reorder == "kd") {
     recursive_kd(data_train.data(), n, d, cluster_size, cluster_tree,
                  data_train_label.data());

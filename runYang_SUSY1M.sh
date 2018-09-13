@@ -11,7 +11,7 @@
 
 export EXEC=./build/examples/KernelRegressionMPI
 # export DATA=/global/cscratch1/sd/gichavez/kernel/datasets/MNIST/MNIST_2M_train_10K_test/mnist_10Kn
-export DATA=/project/projectdirs/sparse/liuyangz/my_research/ML/SUSY_Origin/susy_1Mn
+export DATA=/project/projectdirs/m2957/liuyangz/my_research/ML/SUSY_Origin/susy_1Mn
 
 export OMP_NUM_THREADS=1
 export OMP_PLACES=threads
@@ -20,13 +20,11 @@ export OMP_PROC_BIND=spread
 h=0.1
 lambda=10
 ninc=1
-aca=5
+aca=4
 
-ACC=1e-1
-LEAF=128
+ACC=1e-2
+LEAF=512
 
 nmpi=32
-echo srun -N 1 -n 32 -c 2 --cpu_bind=cores ${EXEC} ${DATA} 8 ${h} 1 2means ${lambda} ${nmpi} ${ninc} ${aca} \
---hss_leaf_size ${LEAF} --hss_rel_tol ${ACC} --hss_compression_algorithm original --hss_d0 128 --hss_max_rank 1024 2>&1 | tee -a susy_kernel1M.out
-time srun -N 1 -n 32 -c 2 --cpu_bind=cores ${EXEC} ${DATA} 8 ${h} 1 2means ${lambda} ${nmpi} ${ninc} ${aca}\
---hss_leaf_size ${LEAF} --hss_rel_tol ${ACC} --hss_compression_algorithm original --hss_d0 128 --hss_max_rank 1024 2>&1 | tee -a susy_kernel1M.out8
+srun -N 32 -n 128 -c 2 --cpu_bind=cores ${EXEC} ${DATA} 8 ${h} 1 cob ${lambda} ${nmpi} ${ninc} ${aca} test \
+--hss_leaf_size ${LEAF} --hss_rel_tol ${ACC} --hss_compression_algorithm original --hss_d0 128 --hss_max_rank 1024 2>&1 | tee -a susy_kernel1M.out32

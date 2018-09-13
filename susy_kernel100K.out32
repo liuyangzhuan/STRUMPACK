@@ -694,3 +694,792 @@ srun: fatal: Can not execute ./build/examples/KernelRegressionMPI
 # Starting HSS compression... 
 # Time for approximate neighbor search: 5.1054 sec
 # compressing with d = 128 + 10 (original)
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 32
+# validation/test = test
+# matrix size = 100000 x 8
+# Preprocessing data...
+# Preprocessing took 0.102089
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=          32
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           8
+ N_leaf:         390
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:         199           0           0           0
+           0           0           0           0
+ constructing level           2
+ rankmax_of_level so far:         199          72           0           0
+           0           0           0           0
+ constructing level           3
+ rankmax_of_level so far:         199          72          36           0
+           0           0           0           0
+ constructing level           4
+ rankmax_of_level so far:         199          72          36          14
+           0           0           0           0
+ constructing level           5
+ rankmax_of_level so far:         199          72          36          14
+           3           0           0           0
+ constructing level           6
+ rankmax_of_level so far:         199          72          36          14
+           3           4           0           0
+ constructing level           7
+ rankmax_of_level so far:         199          72          36          14
+           3           4           6           0
+ constructing level           8
+ rankmax_of_level so far:         199          72          36          14
+           3           4           6           3
+ constructing level           9
+ rankmax_of_level so far:         199          72          36          14
+           3           4           6           3
+ rankmax_of_level:         200         341          70          62          69
+          33          42          26
+ 
+ Total construction time:   192.699898004532      Seconds
+ Total construction flops:      2.71E+12
+ 
+   859.020359375000      MB costed for butterfly forward blocks
+   305.176250000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 192.754 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           8
+ compute block inverse at level:           8
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:   1.19401264190674      Seconds
+ computing inverse block time:  0.357931852340698      Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  0.151957750320435     
+      Time_RedistB:  0.145005226135254     
+      Time_RedistV:  0.384373903274536     
+ time_tmp  0.000000000000000E+000
+ Factorization flops:      1.52E+11
+ 
+   429.851921875000      MB costed for butterfly inverse blocks
+   859.020359375000      MB costed for butterfly Sblocks
+   305.176250000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      1.93E+02 Seconds
+    Construction mem:      1.16E+03 MB
+  Construction flops:      2.71E+12
+  Factorization time:      3.58E-01 Seconds
+   Factorization mem:      1.59E+03 MB
+ Factorization flops:      1.52E+11
+          Solve time:      1.62E-02 Seconds
+         Solve flops:      6.42E+08
+         C_mult time:      1.35E-02 Seconds
+        C_mult flops:      5.32E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.83464e-16
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: Terminating job step 14789593.2
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+slurmstepd: error: *** STEP 14789593.2 ON nid00096 CANCELLED AT 2018-09-13T09:58:04 ***
+srun: error: nid00096: tasks 0-29: Terminated
+srun: Force Terminated job step 14789593.2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 32
+# validation/test = test
+# matrix size = 100000 x 8
+# Preprocessing data...
+# Preprocessing took 0.102752
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=          32
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           8
+ N_leaf:         390
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:         199           0           0           0
+           0           0           0           0
+ constructing level           2
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 32
+# validation/test = test
+# matrix size = 100000 x 8
+# Preprocessing data...
+# Preprocessing took 0.0955328
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=          32
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           8
+ N_leaf:         390
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:          15           0           0           0
+           0           0           0           0
+ constructing level           2
+ rankmax_of_level so far:          15           6           0           0
+           0           0           0           0
+ constructing level           3
+ rankmax_of_level so far:          15           6           7           0
+           0           0           0           0
+ constructing level           4
+ rankmax_of_level so far:          15           6           7           1
+           0           0           0           0
+ constructing level           5
+ rankmax_of_level so far:          15           6           7           1
+           2           0           0           0
+ constructing level           6
+ rankmax_of_level so far:          15           6           7           1
+           2           2           0           0
+ constructing level           7
+ rankmax_of_level so far:          15           6           7           1
+           2           2           3           0
+ constructing level           8
+ rankmax_of_level so far:          15           6           7           1
+           2           2           3           2
+ constructing level           9
+ rankmax_of_level so far:          15           6           7           1
+           2           2           3           2
+ rankmax_of_level:          15          19           9          12          11
+          14          10          14
+ 
+ Total construction time:   1.15624308586121      Seconds
+ Total construction flops:      3.29E+09
+ 
+   75.9157421875000      MB costed for butterfly forward blocks
+   305.176250000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 1.21548 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           8
+ compute block inverse at level:           8
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  6.189990043640137E-002 Seconds
+ computing inverse block time:  4.112768173217773E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  3.474235534667969E-002
+      Time_RedistB:  6.999015808105469E-003
+      Time_RedistV:  1.597142219543457E-002
+ time_tmp  0.104273319244385     
+ Factorization flops:      4.15E+10
+ 
+   35.3354843750000      MB costed for butterfly inverse blocks
+   75.9157421875000      MB costed for butterfly Sblocks
+   305.176250000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      1.16E+00 Seconds
+    Construction mem:      3.81E+02 MB
+  Construction flops:      3.29E+09
+  Factorization time:      4.11E-02 Seconds
+   Factorization mem:      4.16E+02 MB
+ Factorization flops:      4.15E+10
+          Solve time:      5.70E-03 Seconds
+         Solve flops:      3.41E+08
+         C_mult time:      4.53E-03 Seconds
+        C_mult flops:      3.32E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.75388e-16
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: Terminating job step 14789593.9
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+slurmstepd: error: *** STEP 14789593.9 ON nid00096 CANCELLED AT 2018-09-13T10:28:47 ***
+srun: error: nid00096: tasks 0-29: Terminated
+srun: Force Terminated job step 14789593.9
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 32
+# validation/test = test
+# matrix size = 100000 x 8
+# Preprocessing data...
+# Preprocessing took 0.0954841
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=          32
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           8
+ N_leaf:         390
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:          10           0           0           0
+           0           0           0           0
+ constructing level           2
+ rankmax_of_level so far:          10           5           0           0
+           0           0           0           0
+ constructing level           3
+ rankmax_of_level so far:          10           5           3           0
+           0           0           0           0
+ constructing level           4
+ rankmax_of_level so far:          10           5           3           2
+           0           0           0           0
+ constructing level           5
+ rankmax_of_level so far:          10           5           3           2
+           5           0           0           0
+ constructing level           6
+ rankmax_of_level so far:          10           5           3           2
+           5           1           0           0
+ constructing level           7
+ rankmax_of_level so far:          10           5           3           2
+           5           1           2           0
+ constructing level           8
+ rankmax_of_level so far:          10           5           3           2
+           5           1           2           2
+ constructing level           9
+ rankmax_of_level so far:          10           5           3           2
+           5           1           2           2
+ rankmax_of_level:          10          18          14          11          11
+          14          12          14
+ 
+ Total construction time:   1.12415695190430      Seconds
+ Total construction flops:      2.88E+09
+ 
+   67.4075390625000      MB costed for butterfly forward blocks
+   305.176250000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 1.18055 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           8
+ compute block inverse at level:           8
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  6.040620803833008E-002 Seconds
+ computing inverse block time:  4.226112365722656E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  3.418493270874023E-002
+      Time_RedistB:  6.617069244384766E-003
+      Time_RedistV:  1.550960540771484E-002
+ time_tmp  0.124063253402710     
+ Factorization flops:      4.13E+10
+ 
+   32.2043750000000      MB costed for butterfly inverse blocks
+   67.4075390625000      MB costed for butterfly Sblocks
+   305.176250000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      1.12E+00 Seconds
+    Construction mem:      3.73E+02 MB
+  Construction flops:      2.88E+09
+  Factorization time:      4.23E-02 Seconds
+   Factorization mem:      4.05E+02 MB
+ Factorization flops:      4.13E+10
+          Solve time:      5.70E-03 Seconds
+         Solve flops:      3.38E+08
+         C_mult time:      4.58E-03 Seconds
+        C_mult flops:      3.30E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.75156e-16
+# Starting prediction step
+# prediction took 9.96409
+# prediction score: 70.88%
+
+srun: error: nid00096: tasks 0-31: Segmentation fault
+srun: Terminating job step 14789593.10
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 32
+# validation/test = test
+# matrix size = 100000 x 8
+# Preprocessing data...
+# Preprocessing took 0.0960238
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=          32
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           8
+ N_leaf:         390
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:          16           0           0           0
+           0           0           0           0
+ constructing level           2
+ rankmax_of_level so far:          16           6           0           0
+           0           0           0           0
+ constructing level           3
+ rankmax_of_level so far:          16           6           2           0
+           0           0           0           0
+ constructing level           4
+ rankmax_of_level so far:          16           6           2           5
+           0           0           0           0
+ constructing level           5
+ rankmax_of_level so far:          16           6           2           5
+           1           0           0           0
+ constructing level           6
+ rankmax_of_level so far:          16           6           2           5
+           1           2           0           0
+ constructing level           7
+ rankmax_of_level so far:          16           6           2           5
+           1           2           1           0
+ constructing level           8
+ rankmax_of_level so far:          16           6           2           5
+           1           2           1           2
+ constructing level           9
+ rankmax_of_level so far:          16           6           2           5
+           1           2           1           2
+ rankmax_of_level:          16          32          10          11          11
+          14          14          15
+ 
+ Total construction time:   1.23642492294312      Seconds
+ Total construction flops:      3.95E+09
+ 
+   83.3437656250000      MB costed for butterfly forward blocks
+   305.176250000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 1.29139 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           8
+ compute block inverse at level:           8
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  7.617115974426270E-002 Seconds
+ computing inverse block time:  3.164172172546387E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  2.420115470886230E-002
+      Time_RedistB:  8.252143859863281E-003
+      Time_RedistV:  2.039265632629395E-002
+ time_tmp  0.141184568405151     
+ Factorization flops:      4.16E+10
+ 
+   36.5501562500000      MB costed for butterfly inverse blocks
+   83.3437656250000      MB costed for butterfly Sblocks
+   305.176250000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      1.24E+00 Seconds
+    Construction mem:      3.89E+02 MB
+  Construction flops:      3.95E+09
+  Factorization time:      3.16E-02 Seconds
+   Factorization mem:      4.25E+02 MB
+ Factorization flops:      4.16E+10
+          Solve time:      5.85E-03 Seconds
+         Solve flops:      3.43E+08
+         C_mult time:      4.46E-03 Seconds
+        C_mult flops:      3.34E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.75062e-16
+# Starting prediction step
+# prediction took 9.96058
+# prediction score: 70.88%
+
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+Attempting to use an MPI routine after finalizing MPICH
+srun: error: nid00096: tasks 0-31: Exited with exit code 1
+srun: Terminating job step 14789593.13
+srun: error: nid00096: tasks 0-31: Exited with exit code 1
+srun: error: Task 0 reported exit for a second time.
+srun: error: Task 1 reported exit for a second time.
+srun: error: Task 2 reported exit for a second time.
+srun: error: Task 3 reported exit for a second time.
+srun: error: Task 4 reported exit for a second time.
+srun: error: Task 5 reported exit for a second time.
+srun: error: Task 6 reported exit for a second time.
+srun: error: Task 7 reported exit for a second time.
+srun: error: Task 8 reported exit for a second time.
+srun: error: Task 9 reported exit for a second time.
+srun: error: Task 10 reported exit for a second time.
+srun: error: Task 11 reported exit for a second time.
+srun: error: Task 12 reported exit for a second time.
+srun: error: Task 13 reported exit for a second time.
+srun: error: Task 14 reported exit for a second time.
+srun: error: Task 15 reported exit for a second time.
+srun: error: Task 16 reported exit for a second time.
+srun: error: Task 17 reported exit for a second time.
+srun: error: Task 18 reported exit for a second time.
+srun: error: Task 19 reported exit for a second time.
+srun: error: Task 20 reported exit for a second time.
+srun: error: Task 21 reported exit for a second time.
+srun: error: Task 22 reported exit for a second time.
+srun: error: Task 23 reported exit for a second time.
+srun: error: Task 24 reported exit for a second time.
+srun: error: Task 25 reported exit for a second time.
+srun: error: Task 26 reported exit for a second time.
+srun: error: Task 27 reported exit for a second time.
+srun: error: Task 28 reported exit for a second time.
+srun: error: Task 29 reported exit for a second time.
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+# usage: ./KernelRegressionMPI file d h kernel(1=Gauss,2=Laplace) reorder(natural, 2means, kd, pca) lambda nmpi ninc ACA mode(valid, test)
+# data dimension = 8
+# kernel h = 0.1
+# lambda = 10
+# kernel type = Gauss
+# reordering/clustering = cob
+# nmpi = 32
+# validation/test = test
+# matrix size = 100000 x 8
+# Preprocessing data...
+# Preprocessing took 0.0976801
+# HSS compression .. 
+# Called <FAST_H_SAMPLING> Started matrix construction...
+ NUMBER_MPI=          32
+ OMP_NUM_THREADS=           1
+ HODLR_BUTTERFLY_SOLVER
+    
+ User-supplied kernel and user-supplied tree order:
+     
+ HODLR formatting......
+ 
+ Maxlevel_for_blocks:           8
+ N_leaf:         390
+ 
+ Constructing basis groups...
+ HODLR formatting finished
+     
+ HODLR construction......
+ 
+ SVD error threshold  1.000000000000000E-002
+ 
+ constructing Leaf-blocks......
+ constructing level           1
+ rankmax_of_level so far:          12           0           0           0
+           0           0           0           0
+ constructing level           2
+ rankmax_of_level so far:          12          13           0           0
+           0           0           0           0
+ constructing level           3
+ rankmax_of_level so far:          12          13          14           0
+           0           0           0           0
+ constructing level           4
+ rankmax_of_level so far:          12          13          14           2
+           0           0           0           0
+ constructing level           5
+ rankmax_of_level so far:          12          13          14           2
+           1           0           0           0
+ constructing level           6
+ rankmax_of_level so far:          12          13          14           2
+           1           1           0           0
+ constructing level           7
+ rankmax_of_level so far:          12          13          14           2
+           1           1           2           0
+ constructing level           8
+ rankmax_of_level so far:          12          13          14           2
+           1           1           2           2
+ constructing level           9
+ rankmax_of_level so far:          12          13          14           2
+           1           1           2           2
+ rankmax_of_level:          12          16          18          15          11
+          18          13          15
+ 
+ Total construction time:   1.30026793479919      Seconds
+ Total construction flops:      3.84E+09
+ 
+   81.4394609375000      MB costed for butterfly forward blocks
+   305.176250000000      MB costed for direct forward blocks
+ 
+ HODLR construction finished
+     
+# HODLR construction time 1.35851 seconds
+ Cascading factorizing......
+ 
+ Computing block inverse at level Maxlevel_for_blocks+1...
+ Computing block inverse at higher levels...
+ update forward blocks at level:           8
+ compute block inverse at level:           8
+ update forward blocks at level:           7
+ compute block inverse at level:           7
+ update forward blocks at level:           6
+ compute block inverse at level:           6
+ update forward blocks at level:           5
+ compute block inverse at level:           5
+ update forward blocks at level:           4
+ compute block inverse at level:           4
+ update forward blocks at level:           3
+ compute block inverse at level:           3
+ update forward blocks at level:           2
+ compute block inverse at level:           2
+ update forward blocks at level:           1
+ compute block inverse at level:           1
+ computing updated forward block time:  7.004642486572266E-002 Seconds
+ computing inverse block time:  3.876376152038574E-002 Seconds
+      Time_Init:  0.000000000000000E+000
+      Time_MVP:  0.000000000000000E+000
+      Time_Reconstruct:  0.000000000000000E+000
+      Time_Onesub:  0.000000000000000E+000
+      Time_SMW:  3.171181678771973E-002
+      Time_RedistB:  7.607936859130859E-003
+      Time_RedistV:  1.825499534606934E-002
+ time_tmp  0.120707273483276     
+ Factorization flops:      4.16E+10
+ 
+   36.2022031250000      MB costed for butterfly inverse blocks
+   81.4394609375000      MB costed for butterfly Sblocks
+   305.176250000000      MB costed for direct inverse blocks
+  0.000000000000000E+000 MB costed for storing intermidiate vectors
+ 
+ Cascading factorizing finished
+     
+solve start
+ Solve ......
+ Solve finished
+     
+ Multiply ......
+ Multiply finished
+     
+   Construction time:      1.30E+00 Seconds
+    Construction mem:      3.87E+02 MB
+  Construction flops:      3.84E+09
+  Factorization time:      3.88E-02 Seconds
+   Factorization mem:      4.23E+02 MB
+ Factorization flops:      4.16E+10
+          Solve time:      5.80E-03 Seconds
+         Solve flops:      3.43E+08
+         C_mult time:      4.56E-03 Seconds
+        C_mult flops:      3.33E+08
+# relative error = ||B-H*(H\B)||_F/||B||_F = 1.75409e-16
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: Terminating job step 14789593.14
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+srun: error: nid00096: tasks 30-31: Segmentation fault
+srun: error: Task 30 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+slurmstepd: error: *** STEP 14789593.14 ON nid00096 CANCELLED AT 2018-09-13T10:43:17 ***
+srun: error: nid00096: tasks 0-29: Terminated
+srun: Force Terminated job step 14789593.14
