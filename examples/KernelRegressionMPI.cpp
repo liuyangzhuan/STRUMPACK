@@ -171,6 +171,34 @@ inline double K10_kernel(double *x, double *y, int d, double h) {
   return pow(dotp+h,2);
 }
 
+
+// get maximum tree level
+inline void get_treelevel(HSSPartitionTree &tree, int &level, int level_ind) {
+	level = std::max(level,level_ind);
+	if (!tree.c.empty()) {
+		get_treelevel(tree.c[0], level, level_ind+1);
+		get_treelevel(tree.c[1], level, level_ind+1);
+	}
+}
+
+// get leaf node sizes of a tree
+inline void get_leafsizes(HSSPartitionTree &tree, int &leaf_ind, int* leaf_sizes) {
+	if (!tree.c.empty()) {
+		get_leafsizes(tree.c[0], leaf_ind, leaf_sizes);
+		get_leafsizes(tree.c[1], leaf_ind, leaf_sizes);
+	}else{
+		leaf_sizes[leaf_ind++] = tree.size;
+	}
+} 
+
+
+//convert from blacs local indices to global indices
+inline int l2g(int il, int p, int n,int np,int nb){
+	int ilm1 = il-1;
+	return ((floor(ilm1/nb) * np) + p)*nb + ilm1%nb + 1;
+} 
+
+
 inline int *kmeans_start_random(int n, int k) {
   uniform_int_distribution<int> uniform_random(0, n - 1);
   int *ind_centers = new int[k];
@@ -428,58 +456,189 @@ void kd_partition(double *p, int n, int d, int *nc, double *labels) {
     }
   }
 
+   
+  
+  std::vector<std::pair<double, int>> dat_MD;
+  dat_MD.resize(n);
+  for (int i=0;i<n;++i){
+	dat_MD.data()[i].first = p[i * d + dim];
+	dat_MD.data()[i].second = i;
+  } 
+  std::sort(dat_MD.begin(), dat_MD.end());  
+  double *p_perm = new double[n * d];
+  double *labels_perm = new double[n];
+  for (int row=0; row<n; ++row){
+  for (int l = 0; l < d; l++)
+    p_perm[l + row * d] = p[l + dat_MD.data()[row].second * d]; 
+	labels_perm[row] = labels[dat_MD.data()[row].second]; 
+  }  
+  dat_MD.clear();
+  
+#if 1  // split by median
+  nc[0] = floor((double)n/2.0);
+  nc[1] = n - nc[0];  
+#else // split by mean  
   // find the mean
   double mean_value = 0.;
   for (int i = 0; i < n; ++i) {
-    mean_value += p[i * d + dim];
+    mean_value += p_perm[i * d + dim];
   }
-  mean_value /= n;
+  mean_value /= n;  
 
-  // split the data
-  int *cluster = new int[n];
-  for (int i = 0; i < n; i++) {
-    cluster[i] = 0;
-  }
   nc[0] = 0;
   nc[1] = 0;
   for (int i = 0; i < n; ++i) {
-    if (p[d * i + dim] > mean_value) {
-      cluster[i] = 1;
+    if (p_perm[d * i + dim] > mean_value) {
       nc[1] += 1;
     } else {
       nc[0] += 1;
     }
   }
 
-  // permute the data
-
-  int *ci = new int[2];
-  for (int c = 0; c < 2; c++)
-    ci[c] = 0;
-  double *p_perm = new double[n * d];
-  double *labels_perm = new double[n];
-  int row = 0;
-  for (int c = 0; c < 2; c++) {
-    for (int j = 0; j < nc[c]; j++) {
-      while (cluster[ci[c]] != c)
-        ci[c]++;
-      for (int l = 0; l < d; l++)
-        p_perm[l + row * d] = p[l + ci[c] * d];
-      labels_perm[row] = labels[ci[c]];
-      ci[c]++;
-      row++;
-    }
-  }
-
+#endif  
+  
+  
   copy(p_perm, p_perm + n * d, p);
   copy(labels_perm, labels_perm + n, labels);
   delete[] p_perm;
   delete[] labels_perm;
-  delete[] ci;
   delete[] maxes;
   delete[] mins;
-  delete[] cluster;
+  
+  // // split the data
+  // int *cluster = new int[n];
+  // for (int i = 0; i < n; i++) {
+    // cluster[i] = 0;
+  // }
+  // nc[0] = 0;
+  // nc[1] = 0;
+  // for (int i = 0; i < n; ++i) {
+    // if (p[d * i + dim] > mean_value) {
+      // cluster[i] = 1;
+      // nc[1] += 1;
+    // } else {
+      // nc[0] += 1;
+    // }
+  // }
+
+  // // permute the data
+
+  // int *ci = new int[2];
+  // for (int c = 0; c < 2; c++)
+    // ci[c] = 0;
+  // double *p_perm = new double[n * d];
+  // double *labels_perm = new double[n];
+  // int row = 0;
+  // for (int c = 0; c < 2; c++) {
+    // for (int j = 0; j < nc[c]; j++) {
+      // while (cluster[ci[c]] != c)
+        // ci[c]++;
+      // for (int l = 0; l < d; l++)
+        // p_perm[l + row * d] = p[l + ci[c] * d];
+      // labels_perm[row] = labels[ci[c]];
+      // ci[c]++;
+      // row++;
+    // }
+  // }
+
+  // copy(p_perm, p_perm + n * d, p);
+  // copy(labels_perm, labels_perm + n, labels);
+  // delete[] p_perm;
+  // delete[] labels_perm;
+  // delete[] ci;
+  // delete[] maxes;
+  // delete[] mins;
+  // delete[] cluster;
 }
+
+
+void cobble_partition(double *p, int n, int d, int *nc, double *labels) {
+
+  // find centroid
+  double centroid[d];
+
+  for (int i = 0; i < d; i++) {
+    centroid[i] = 0;
+  }
+
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < d; j++) {
+      centroid[j] += p[i * d + j];
+    }
+  }
+
+  for (int j = 0; j < d; j++)
+    centroid[j] /= n;
+
+  // find farthest point from centroid
+  int first_index = 0;
+  double max_dist = -1;
+
+  for (int i = 0; i < n; i++) {
+    double dd = dist(&p[i * d], centroid, d);
+    if (dd > max_dist) {
+      max_dist = dd;
+      first_index = i;
+    }
+  }
+
+  // compute and sort distance from the firsth point
+  std::vector<double> dists;
+  dists.resize(n);
+  for (int i = 0; i < n; i++) {
+    dists[i] = dist(&p[i * d], &p[first_index * d], d);
+  }
+  
+  std::vector<std::pair<double, int>> dat_MD;
+  dat_MD.resize(n);
+  for (int i=0;i<n;++i){
+	dat_MD.data()[i].first = dists[i];
+	dat_MD.data()[i].second = i;
+  } 
+  std::sort(dat_MD.begin(), dat_MD.end());  
+  
+  double *p_perm = new double[n * d];
+  double *labels_perm = new double[n];
+  for (int row=0; row<n; ++row){
+  // cout<<dat_MD.data()[row].first<<""<<dat_MD.data()[row].second<<endl;
+  for (int l = 0; l < d; l++)
+    p_perm[l + row * d] = p[l + dat_MD.data()[row].second * d]; 
+	labels_perm[row] = labels[dat_MD.data()[row].second]; 
+  }  
+  dat_MD.clear();
+  dists.clear();
+  
+  nc[0] = floor((double)n/2.0);
+  nc[1] = n - nc[0];    
+  
+  copy(p_perm, p_perm + n * d, p);
+  copy(labels_perm, labels_perm + n, labels);
+  delete[] p_perm;
+  delete[] labels_perm;
+
+}
+
+
+
+
+void recursive_cobble(double *p, int n, int d, int cluster_size,
+                  HSSPartitionTree &tree, double *labels) {
+  if (n < cluster_size)
+    return;
+  auto nc = new int[2];
+  cobble_partition(p, n, d, nc, labels);
+  if (nc[0] == 0 || nc[1] == 0)
+    return;
+  tree.c.resize(2);
+  tree.c[0].size = nc[0];
+  tree.c[1].size = nc[1];
+  recursive_cobble(p, nc[0], d, cluster_size, tree.c[0], labels);
+  recursive_cobble(p + nc[0] * d, nc[1], d, cluster_size, tree.c[1],
+               labels + nc[0]);
+  delete[] nc;
+}
+
+
 
 void recursive_kd(double *p, int n, int d, int cluster_size,
                   HSSPartitionTree &tree, double *labels) {
@@ -598,7 +757,6 @@ void recursive_pca(double *p, int n, int d, int cluster_size,
 typedef void* F2Cptr;  // pointer passing fortran derived types to c
 typedef void* C2Fptr;  // pointer passing c objects to fortran
 
-
 extern "C" {
   void FC_GLOBAL_(h_matrix_fill,H_MATRIX_FILL)
     (int* Npo, int* Ndim, double* Locations,
@@ -630,7 +788,6 @@ extern "C" {
 	inline void c_hodlr_set_D_option(F2Cptr* option, char const * nam, double val){
 		c_hodlr_setoption(option, nam, (C2Fptr) &val);
 	}	
-	
 }
 
 
@@ -728,6 +885,9 @@ public:
   std::vector<int> _Hperm;
   std::vector<int> _iHperm;
   int _Hrows = 0;
+  int _cluster_size = 500; // finest leafsize
+  int _nlevel = 0; // 0: tree level, nonzero if a tree is provided 
+  int* _tree = new int[(int)pow(2,_nlevel)]; //user provided array containing size of each leaf node, not used if _nlevel=0  
   vector<int> _dist;
   C_QuantZmn* quant_ptr;
   F2Cptr ho_bf;  //HODLR returned by Fortran code 
@@ -742,9 +902,9 @@ public:
   KernelMPI() = default;
   KernelMPI(vector<double> data, int d, double h, double l,
             HSSOptions<double>& opts, int ctxt_all, 
-	    int nprow, int npcol,  int nmpi, int ninc, int aca)
+	    int nprow, int npcol,  int nmpi, int ninc, int aca, int cluster_size, int nlevel, int *tree)
     : _data(move(data)), _d(d), _n(_data.size() / _d),
-      _h(h), _l(l), _ctxt_all(ctxt_all), _prows(nprow), _pcols(npcol) {
+      _h(h), _l(l), _ctxt_all(ctxt_all), _prows(nprow), _pcols(npcol),_cluster_size(cluster_size),_nlevel(nlevel) {
     assert(size_t(_n * _d) == _data.size());
 
 // #if FAST_H_SAMPLING == 1
@@ -786,19 +946,20 @@ public:
       cout << "# Called <FAST_H_SAMPLING> Started matrix construction..." << endl;
     auto starttime = MPI_Wtime();		   
 	
+	_tree = new int[(int)pow(2,_nlevel)];
+	copy(tree, tree + (int)pow(2,_nlevel), _tree);
 	
 	int* groups;
 	int ker = 1;
-	int preorder=0;
-	int Nmin = 500;    // finest leafsize
+	int preorder=1;
+	// int Nmin = 500;    // finest leafsize
 	double tol = 1e-2; // compression tolerance
 	int com_opt=2;    //compression option 1:SVD 2:RRQR 3:ACA 4:BACA  
 	int sort_opt=3; //1:KD tree 3:balanced 2-means
 	int checkerr = 0; //1: check compression quality 
 	int batch = 100; //batch size for BACA	
 	int myseg=0;     // local number of unknowns
-	int nlevel = 0; // 0: tree level, nonzero if a tree is provided 
-	int* tree = new int[(int)pow(2,nlevel)]; //user provided array containing size of each leaf node, not used if nlevel=0	
+	
 	
 	quant_ptr=new C_QuantZmn(_data, _d, _h, _l,ker);	
 
@@ -815,7 +976,7 @@ public:
 	// set hodlr options
 	c_hodlr_set_D_option(&option, "tol_comp", tol);
 	c_hodlr_set_I_option(&option, "preorder", preorder);
-	c_hodlr_set_I_option(&option, "Nmin_leaf", Nmin); 
+	c_hodlr_set_I_option(&option, "Nmin_leaf", _cluster_size); 
 	c_hodlr_set_I_option(&option, "RecLR_leaf", com_opt); 
 	c_hodlr_set_I_option(&option, "xyzsort", sort_opt); 
 	c_hodlr_set_I_option(&option, "ErrFillFull", checkerr); 
@@ -823,7 +984,7 @@ public:
 	
 
     // construct hodlr with geometrical points	
-	c_hodlr_construct(&_n, &_d, _data.data(), &nlevel, tree, _Hperm.data(), &_Hrows, &ho_bf, &option, &stats, &msh, &kerquant, &ptree, &C_FuncZmn, quant_ptr, &Fcomm);		
+	c_hodlr_construct(&_n, &_d, _data.data(), &_nlevel, _tree, _Hperm.data(), &_Hrows, &ho_bf, &option, &stats, &msh, &kerquant, &ptree, &C_FuncZmn, quant_ptr, &Fcomm);		
 	
 	
     for (auto& i : _Hperm) i--; // Fortran to C
@@ -1089,8 +1250,7 @@ int main(int argc, char *argv[]) {
   int ctxt_all = scalapack::Csys2blacs_handle(MPI_COMM_WORLD);
   scalapack::Cblacs_gridinit(&ctxt_all, "R", 1, P);
 
-  BLACSGrid grid(MPI_COMM_WORLD);
-  
+	BLACSGrid grid(MPI_COMM_WORLD);								 
   string filename("smalltest.dat");
   int d = 8;
   string reorder("natural");
@@ -1171,6 +1331,9 @@ int main(int argc, char *argv[]) {
   if (reorder == "2means") {
     recursive_2_means(data_train.data(), n, d, cluster_size, cluster_tree,
                       data_train_label.data());
+  } else if (reorder == "cob") {
+    recursive_cobble(data_train.data(), n, d, cluster_size, cluster_tree,
+                 data_train_label.data());  
   } else if (reorder == "kd") {
     recursive_kd(data_train.data(), n, d, cluster_size, cluster_tree,
                  data_train_label.data());
@@ -1179,9 +1342,20 @@ int main(int argc, char *argv[]) {
                   data_train_label.data());
   }
 
+  int nlevel=0;
+  get_treelevel(cluster_tree, nlevel, 0); 
+  // cout << "# tree level " << nlevel<< endl; 
+
+  int* tree = new int[(int)pow(2,nlevel)]; //user provided array containing size of each leaf node, not used
+  int leaf_ind=0;  
+  get_leafsizes(cluster_tree, leaf_ind, tree);
+  // for (int i=0; i<(int)pow(2,nlevel); ++i)
+  // cout  << tree[i]<< endl; 
+  
+  
   if (!mpi_rank())
     cout << "# Preprocessing took " << timer.elapsed() << endl;
-
+  
   if (!mpi_rank())
     cout << "# HSS compression .. " << endl;
   timer.start();
@@ -1190,7 +1364,7 @@ int main(int argc, char *argv[]) {
 
   KernelMPI kernel_matrix
     (data_train, d, h, lambda, hss_opts,
-     ctxt_all, nprow, npcol, nmpi, ninc, ACA);
+     ctxt_all, nprow, npcol, nmpi, ninc, ACA, cluster_size, nlevel, tree);
 
   auto f0_compress = strumpack::params::flops.load();
 
@@ -1204,12 +1378,12 @@ int main(int argc, char *argv[]) {
 
   if (reorder != "natural")
     K = new HSSMatrixMPI<double>
-      (cluster_tree, kernel_matrix, ctxt, kernel_matrix,
-       hss_opts, MPI_COMM_WORLD);
+      (cluster_tree, &grid, kernel_matrix, kernel_matrix,
+       hss_opts);
   else
     K = new HSSMatrixMPI<double>
-      (n, n, kernel_matrix, ctxt, kernel_matrix,
-       hss_opts, MPI_COMM_WORLD);
+      (n, n, &grid, kernel_matrix, kernel_matrix,
+       hss_opts);
 
 
   if (K->is_compressed()) {
@@ -1253,12 +1427,15 @@ int main(int argc, char *argv[]) {
     cout << "# factorization flops = " << total_flops_factor << endl;
 #endif	
 	
-	 
+	
   // Starting solve	
   DenseMatrix<double> B(n, 1, &data_train_label[0], n);
   DenseMatrix<double> weights(B);
-  DistributedMatrix<double> Bdist(&grid, B);
-  DistributedMatrix<double> wdist(&grid, weights);
+  DistributedMatrix<double> Bdist(&grid, n,1);
+  Bdist.scatter(B);
+  DistributedMatrix<double> wdist(&grid, n,1);
+  wdist.scatter(weights);
+  
   if (!mpi_rank())
     cout << "solve start" << endl;
   timer.start();
@@ -1271,11 +1448,10 @@ int main(int argc, char *argv[]) {
 	c_hodlr_solve(S1D.data(), R1D.data(), &kernel_matrix._Hrows, &rhs, &kernel_matrix.ho_bf,&kernel_matrix.option, &kernel_matrix.stats, &kernel_matrix.ptree);	
     kernel_matrix.redistribute_1D_to_2D(S1D, wdist);
   
-    c_hodlr_printstats(&kernel_matrix.stats, &kernel_matrix.ptree);
-  
   
 	c_hodlr_mult(S1D.data(), R1D.data(), &kernel_matrix._Hrows, &rhs, &kernel_matrix.ho_bf,&kernel_matrix.option, &kernel_matrix.stats, &kernel_matrix.ptree);	
-	DistributedMatrix<double> Bcheck(&grid, B);
+	DistributedMatrix<double> Bcheck(&grid, n, 1);
+	Bcheck.scatter(B);
     kernel_matrix.redistribute_1D_to_2D(R1D, Bcheck);  
   
 #else
@@ -1295,7 +1471,7 @@ int main(int argc, char *argv[]) {
 	
 #endif
 
-	
+c_hodlr_printstats(&kernel_matrix.stats, &kernel_matrix.ptree);	
   
 
   Bcheck.scaled_add(-1., Bdist);
@@ -1304,6 +1480,71 @@ int main(int argc, char *argv[]) {
     cout << "# relative error = ||B-H*(H\\B)||_F/||B||_F = "
          << Bchecknorm << endl;
 
+		 
+
+//------generate random x vector for test solution accuracy----		 
+		 
+		 
+{
+
+
+  vector<double> sample_vector(n);
+  normal_distribution<double> normal_distr(0.0,1.0);
+  for (int i = 0; i < n; i++) 
+  {
+    sample_vector[i] = normal_distr(generator);
+  }
+  DenseMatrix<double> sample_v(n, 1, &sample_vector[0], n);
+  
+
+	
+	DistributedMatrix<double> Kdense_dist(&grid, n,n);		
+	int lrows,lcols;
+	int r,c;
+	lrows = scalapack::numroc(Kdense_dist.desc()[2], Kdense_dist.desc()[4], Kdense_dist.prow(), Kdense_dist.desc()[6], Kdense_dist.nprows());
+	lcols = scalapack::numroc(Kdense_dist.desc()[3], Kdense_dist.desc()[5], Kdense_dist.pcol(), Kdense_dist.desc()[7], Kdense_dist.npcols());
+	// double tmp=0;
+	for( int myi=1; myi<= lrows; myi++){
+		r =  l2g(myi,Kdense_dist.prow(),n,Kdense_dist.nprows(),Kdense_dist.desc()[4])-1;
+		for( int myj=1; myj<= lcols; myj++){
+			c =  l2g(myj,Kdense_dist.pcol(),n,Kdense_dist.npcols(),Kdense_dist.desc()[5])-1;
+			// if(!mpi_rank())
+				// cout<<c<<endl;		
+			Kdense_dist(myi-1, myj-1) = Gauss_kernel(&data_train[r*d], &data_train[c*d], d, h);
+			if (r == c)
+			{
+			  Kdense_dist(myi-1, myj-1) = Kdense_dist(myi-1, myj-1) + lambda;
+			}					
+			// tmp += Kdense_dist(myi-1, myj-1);
+		}
+	}	
+  
+    DistributedMatrix<double> sample_v_dist(&grid, n,1);
+	sample_v_dist.scatter(sample_v);
+    DistributedMatrix<double> sample_rhs_dist(sample_v_dist);	
+	gemm(Trans::N, Trans::N, 1., Kdense_dist, sample_v_dist, 0., sample_rhs_dist);
+	
+
+	
+
+#if FAST_H_SAMPLING == 2  
+	DenseMatrix<double> S1D(kernel_matrix._Hrows, 1);
+	DenseMatrix<double> R1D = kernel_matrix.redistribute_2D_to_1D(sample_rhs_dist);
+	int rhs=1;      
+	c_hodlr_solve(S1D.data(), R1D.data(), &kernel_matrix._Hrows, &rhs, &kernel_matrix.ho_bf,&kernel_matrix.option, &kernel_matrix.stats, &kernel_matrix.ptree);	
+    kernel_matrix.redistribute_1D_to_2D(S1D, sample_rhs_dist);
+#else
+  K->solve(ULV, sample_rhs_dist);
+#endif  
+  
+  sample_rhs_dist.scaled_add(-1., sample_v_dist);
+  double err_sol=sample_rhs_dist.normF()/sample_v_dist.normF();
+  if (!mpi_rank()){
+  cout << "# solution error = "<<  err_sol<< endl; 
+  }  
+			
+		 
+} 
 
   if (!mpi_rank())
     cout << "# Starting prediction step" << endl;

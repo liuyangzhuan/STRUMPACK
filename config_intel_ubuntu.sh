@@ -6,7 +6,7 @@ cd build
 export CRAYPE_LINK_TYPE="dynamic"
 export PARMETIS_INSTALL="/home/administrator/Desktop/software/parmetis-4.0.3"
 cmake .. \
--DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_BUILD_TYPE=Debug \
 -DCMAKE_INSTALL_PREFIX=. \
 -DCMAKE_CXX_COMPILER=mpiicpc \
 -DCMAKE_CXX_FLAGS="-I/home/administrator/Desktop/research/STRUMPACK_H_RBF/hod-lr-bf/SRC_DOUBLE" \
